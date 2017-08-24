@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-SpartanClash-A283BC97-548A-40B0-8D03-ABFE71AFDC08</UserSecretsId>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>aspnet-SpartanClash-FE759949-5171-4704-ABBB-15DF9587CBA2</UserSecretsId>
   </PropertyGroup>
 
 
