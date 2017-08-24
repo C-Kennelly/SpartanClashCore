@@ -1,0 +1,10 @@
+c:\Users\admin\Source\Repos\SpartanClashCore\bin\Debug\netcoreapp2.0\SpartanClashCore.deps.json
+c:\Users\admin\Source\Repos\SpartanClashCore\bin\Debug\netcoreapp2.0\SpartanClashCore.runtimeconfig.json
+c:\Users\admin\Source\Repos\SpartanClashCore\bin\Debug\netcoreapp2.0\SpartanClashCore.runtimeconfig.dev.json
+c:\Users\admin\Source\Repos\SpartanClashCore\bin\Debug\netcoreapp2.0\SpartanClashCore.dll
+c:\Users\admin\Source\Repos\SpartanClashCore\bin\Debug\netcoreapp2.0\SpartanClashCore.pdb
+c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.csproj.CoreCompileInputs.cache
+c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.AssemblyInfoInputs.cache
+c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.AssemblyInfo.cs
+c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.dll
+c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.pdb
