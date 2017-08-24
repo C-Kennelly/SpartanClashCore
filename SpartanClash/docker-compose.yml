@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  spartanclash:
+    image: spartanclash
+    build:
+      context: ./SpartanClash
+      dockerfile: Dockerfile
