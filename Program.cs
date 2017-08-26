@@ -21,11 +21,7 @@ namespace SpartanClashCore
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
-                //Pretend this does someting so we can trigger Jenkins.
-                //Attempt #2
-                //Attempt #3
-                //Checking build status on github.
-                //Final build check for the night......
+
 
     }
 }
