@@ -24,5 +24,6 @@ namespace SpartanClashCore
                 //Pretend this does someting so we can trigger Jenkins.
                 //Attempt #2
                 //Attempt #3
+                //Checking build status on github.
     }
 }
