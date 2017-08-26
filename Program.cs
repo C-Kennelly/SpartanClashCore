@@ -22,5 +22,6 @@ namespace SpartanClashCore
                 .UseStartup<Startup>()
                 .Build();
                 //Pretend this does someting so we can trigger Jenkins.
+                //Attempt #2
     }
 }
