@@ -25,7 +25,7 @@ namespace SpartanClashCore
                 //Attempt #2
                 //Attempt #3
                 //Checking build status on github.
-                //Final build check for the night...
+                //Final build check for the night....
 
     }
 }
