@@ -19,7 +19,6 @@ namespace SpartanClashCore.Controllers
             }
         }
 
-        [HandleError]
         public ActionResult CompanyResults(string company) 
         {
             using(var db = new clashdbEntities()) 

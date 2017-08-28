@@ -12787,6 +12787,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
       "projectName": "SpartanClashCore",
@@ -12822,6 +12825,14 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Pomelo.EntityFrameworkCore.MySql": {
+            "target": "Package",
+            "version": "2.0.0-rtm-10058"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "2.0.0",
@@ -12830,14 +12841,6 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
-          "Pomelo.EntityFrameworkCore.MySql": {
-            "target": "Package",
-            "version": "2.0.0-rtm-10058"
           }
         },
         "imports": [
