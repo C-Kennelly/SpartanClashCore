@@ -8,4 +8,3 @@ c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClas
 c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.AssemblyInfo.cs
 c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.dll
 c:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.pdb
-C:\Users\admin\Source\Repos\SpartanClashCore\obj\Debug\netcoreapp2.0\SpartanClashCore.csprojResolveAssemblyReference.cache
