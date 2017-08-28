@@ -6,9 +6,9 @@ namespace SpartanClashCore.ViewModels
     {
         public string companyName { get; }
 
-        public CompanyRegistryItem(t_companies rawItem)
+        public CompanyRegistryItem(TCompanies rawItem)
         {
-            companyName = rawItem.company;
+            companyName = rawItem.Company;
         }
     }
 }

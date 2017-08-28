@@ -12,23 +12,23 @@ namespace SpartanClashCore.ViewModels
         public int losses { get; }
         public int totalMatches { get; }
 
-        public LeaderboardItem(t_companies rawItem)
+        public LeaderboardItem(TCompanies rawItem)
         {
-            rank = rawItem.rank;
-
-            companyName = rawItem.company;
-
-            winPercent = ConvertWinPercent(rawItem.win_percent);
+            rank = rawItem.Rank;
+        
+            companyName = rawItem.Company;
+        
+            winPercent = ConvertWinPercent(rawItem.WinPercent);
             
-            if(rawItem.wins == null)    {wins = 0;}
-            else                        {wins = (int)rawItem.wins; }
-
-            if (rawItem.losses == null) { losses = 0; }
-            else { losses = (int)rawItem.losses; }
-
-            if (rawItem.total_matches == null)  {totalMatches = 0;}
-            else                                { totalMatches = (int)rawItem.total_matches;}
-
+            if(rawItem.Wins == null)    {wins = 0;}
+            else                        {wins = (int)rawItem.Wins; }
+        
+            if (rawItem.Losses == null) { losses = 0; }
+            else { losses = (int)rawItem.Losses; }
+        
+            if (rawItem.TotalMatches == null)  {totalMatches = 0;}
+            else                                { totalMatches = (int)rawItem.TotalMatches;}
+        
         }
 
         private string ConvertWinPercent(double? rawWinPercent)

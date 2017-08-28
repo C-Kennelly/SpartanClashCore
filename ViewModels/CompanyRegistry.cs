@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SpartanClashCore.Models;
 
 namespace SpartanClashCore.ViewModels
@@ -9,13 +10,13 @@ namespace SpartanClashCore.ViewModels
 
         public CompanyRegistry()
         {
-            using(var db = new clashdbEntities())
+            using(var db = new clashdbContext())
             {
-                List<t_companies> allCompanies = db.t_companies.OrderBy(x => x.company).ToList();
+                List<TCompanies> allCompanies = db.TCompanies.OrderBy(x => x.Company).ToList();
 
                 registryItems = new List<CompanyRegistryItem> (allCompanies.Count);
 
-                foreach (t_companies company in allCompanies)
+                foreach (TCompanies company in allCompanies)
                 {
                     registryItems.Add(new CompanyRegistryItem(company));
                 }

@@ -24,9 +24,8 @@ namespace SpartanClashCore.ViewModels
         private string allyCompany { get; set; }
         private string enemyCompany1 { get; set; }
         private string enemyCompany2 { get; set; }
-       
-
-        public ClanBattle(string companyName, t_clashdevset match)
+  
+        public ClanBattle(string companyName, TClashdevset match)
         {
             primaryCompany = companyName;
             DetermineTeam(match);
@@ -35,11 +34,11 @@ namespace SpartanClashCore.ViewModels
             SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
             matchDate =(DateTime)match.MatchCompleteDate;
 
-            using (var db = new clashdbEntities())
+            using (var db = new clashdbContext())
             {
-                t_mapmetadata metadataRecord = db.t_mapmetadata.Find(match.MapId);
-                mapName = metadataRecord.printableName;
-                mapImageURL = metadataRecord.imageURL;
+                TMapmetadata metadataRecord = db.TMapmetadata.Find(match.MapId);
+                mapName = metadataRecord.PrintableName;
+                mapImageURL = metadataRecord.ImageUrl;
             }
         }
 
@@ -48,48 +47,48 @@ namespace SpartanClashCore.ViewModels
             return mapImageURL;
         }
 
-        private void DetermineTeam(t_clashdevset match)
+        private void DetermineTeam(TClashdevset match)
         {
-            if (primaryCompany == match.Team1_Company1 || primaryCompany == match.Team1_Company2)
+            if (primaryCompany == match.Team1Company1 || primaryCompany == match.Team1Company2)
                         {team = 1; }         else        { team = 2; }
         }
 
-        private void DetermineTeamSpecificComponents(t_clashdevset match)
+        private void DetermineTeamSpecificComponents(TClashdevset match)
         {
             if(team == 1) //Company is on team 1
             {
-                if(match.Team1_Rank == 1) { result = "Win"; } else { result = "Loss"; } 
-                score = (int)match.Team1_Score;
-                enemyScore = (int)match.Team2_Score;
-                enemyCompany1 = match.Team2_Company1;
-                enemyCompany2 = match.Team2_Company2;
+                if(match.Team1Rank == 1) { result = "Win"; } else { result = "Loss"; } 
+                score = (int)match.Team1Score;
+                enemyScore = (int)match.Team2Score;
+                enemyCompany1 = match.Team2Company1;
+                enemyCompany2 = match.Team2Company2;
 
-                if (primaryCompany == match.Team1_Company1)
+                if (primaryCompany == match.Team1Company1)
                 {
-                    allyCompany = match.Team1_Company2;
+                    allyCompany = match.Team1Company2;
                 }
                 else
                 {
-                    allyCompany = match.Team1_Company2;
+                    allyCompany = match.Team1Company2;
                 }
             }
             else //Company is on team 2.
             {
 
-                if (match.Team2_Rank == 1) { result = "Win"; } else { result = "Loss"; }
-                score = (int)match.Team2_Score;
-                enemyScore = (int)match.Team1_Score;
+                if (match.Team2Rank == 1) { result = "Win"; } else { result = "Loss"; }
+                score = (int)match.Team2Score;
+                enemyScore = (int)match.Team1Score;
 
-                enemyCompany1 = match.Team1_Company1;
-                enemyCompany2 = match.Team1_Company2;
+                enemyCompany1 = match.Team1Company1;
+                enemyCompany2 = match.Team1Company2;
 
-                if(primaryCompany == match.Team2_Company1)
+                if(primaryCompany == match.Team2Company1)
                 {
-                    allyCompany = match.Team2_Company2;
+                    allyCompany = match.Team2Company2;
                 }
                 else
                 {
-                    allyCompany = match.Team2_Company1;
+                    allyCompany = match.Team2Company1;
                 }
 
             }
@@ -117,3 +116,5 @@ namespace SpartanClashCore.ViewModels
 
     }
 }
+
+    

@@ -11,7 +11,7 @@ namespace SpartanClashCore.Controllers
         //GET: ServiceRecord
         public ActionResult Index() 
         {
-            using(var db = new clashdbEntities()) 
+            using(var db = new clashdbContext()) 
             {
                 CompanyRegistry companyRegistry = new CompanyRegistry();
 
@@ -21,19 +21,19 @@ namespace SpartanClashCore.Controllers
 
         public ActionResult CompanyResults(string company) 
         {
-            using(var db = new clashdbEntities()) 
+            using(var db = new clashdbContext()) 
             {
-                List<t_clashdevset> companyMatches = db.t_clashdevset
+                List<TClashdevset> companyMatches = db.TClashdevset
                     .Where(
-                        x => x.Team1_Company1 == company
-                        || x.Team1_Company2 == company
-                        || x.Team2_Company1 == company
-                        || x.Team2_Company2 == company
+                        x => x.Team1Company1 == company
+                        || x.Team1Company2 == company
+                        || x.Team2Company1 == company
+                        || x.Team2Company2 == company
                     ).OrderBy(x => x.MatchCompleteDate).ThenBy(x => x.MapId).ToList();
             
                 List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
 
-                foreach(t_clashdevset match in companyMatches) 
+                foreach(TClashdevset match in companyMatches) 
                 {
                     battles.Add(new ClanBattle(company, match));
                 }
@@ -51,5 +51,7 @@ namespace SpartanClashCore.Controllers
         {
             return View(company);
         }
+ 
     }
+
 }
