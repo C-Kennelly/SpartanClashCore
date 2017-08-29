@@ -17,7 +17,9 @@
 
         {
             <div class="leaderboardItem">
-                <span class="companyName">@Html.ActionLink(item.companyName, "CompanyResults/" + item.companyName, "ServiceRecord")</span>
+                <span class="companyName"> 
+                    <a asp-controller="ServiceRecord" asp-action="CompanyResults" asp-route-company=@item.companyName>@item.companyName</a> 
+                </span>
             </div>
 
             <p></p>
