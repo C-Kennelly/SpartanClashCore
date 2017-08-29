@@ -24,7 +24,7 @@
             {
                 <tr>
                     <td>@item.rank</td>
-                    <td>@Html.ActionLink(item.companyName, "CompanyResults/" + item.companyName, "ServiceRecord")</td>
+                    <td><a asp-controller="ServiceRecord" asp-action="CompanyResults" asp-route-company=@item.companyName>@item.companyName</a></td>
                     <td>@item.winPercent %</td>
                     <td>@item.wins wins</td>
                     <td>@item.losses losses</td>

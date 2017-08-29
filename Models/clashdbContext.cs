@@ -16,7 +16,7 @@ namespace SpartanClashCore.Models
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=testspartanclash.cbr1lqfvizgf.us-west-2.rds.amazonaws.com;userid=aws_Read;password=awsRead;database=clashdb");
+                optionsBuilder.UseMySql("server=testspartanclash.cbr1lqfvizgf.us-west-2.rds.amazonaws.com;userid=aws_Read;password=readme1;database=clashdb");
             }
         }
 
