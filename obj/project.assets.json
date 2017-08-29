@@ -13371,11 +13371,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
+      "projectUniqueName": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
       "projectName": "SpartanClashCore",
-      "projectPath": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
+      "projectPath": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\obj\\",
+      "outputPath": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
