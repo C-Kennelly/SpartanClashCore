@@ -38,7 +38,9 @@ else
             <tr> 
                 @if(battle.enemyHeader != "[randoms]")
                 {
-                    <td class="companyName">@Html.ActionLink(battle.enemyHeader, "CompanyResults/" + battle.enemyHeader, "ServiceRecord")</td>
+                    <td class="companyName"><a asp-controller="ServiceRecord" asp-action="CompanyResults" asp-route-company=@battle.enemyHeader>
+                        @battle.enemyHeader
+                    </a></td>
                 }
                 else{
                     <td>@battle.enemyHeader</td>
