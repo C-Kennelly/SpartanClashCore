@@ -17,13 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Spartan Clash", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a asp-controller="Home" class = "navbar-brand">Spartan Clash</a>
+                <!--
+                    @Html.ActionLink("Spartan Clash", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                -->
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Leaderboards", "Index", "Leaderboards")</li>
-                    <li>@Html.ActionLink("Service Record", "Index", "ServiceRecord")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li><a asp-controller="Leaderboards" >Leaderboards</a></li>
+                    <li><a asp-controller="ServiceRecord" >Service Record</a></li>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
                 </ul>
             </div>
         </div>
