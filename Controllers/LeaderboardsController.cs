@@ -3,7 +3,7 @@ using SpartanClashCore.ViewModels;
 
 namespace SpartanClashCore.Controllers
 {
-    public class LeadboardsController : Controller 
+    public class LeaderboardsController : Controller 
     {
         //GET: Leaderboards
         public ActionResult Index() 
