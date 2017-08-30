@@ -13370,12 +13370,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
       "projectName": "SpartanClashCore",
-      "projectPath": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
+      "projectPath": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\SpartanClashCore.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\obj\\",
+      "outputPath": "C:\\Users\\admin\\Source\\Repos\\SpartanClashCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13405,14 +13408,9 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
+          "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.0"
+            "version": "2.0.0-rtm-10058"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -13426,9 +13424,14 @@
             "target": "Package",
             "version": "2.0.0"
           },
-          "Pomelo.EntityFrameworkCore.MySql": {
+          "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0-rtm-10058"
+            "version": "2.0.0",
+            "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.0"
           }
         },
         "imports": [
