@@ -1,0 +1,57 @@
+@using SpartanClash.ViewModels;
+@model List<ClanBattle>
+
+@{
+
+    ViewData["Title"] = "CompanyResults";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    string companyName = Model.FirstOrDefault().primaryCompany;
+}
+
+<h1><u>Company Results</u></h1>
+
+@if(Model.Count == 1)
+{
+    <h4>@companyName has only 1 Warlords match on record:</h4>
+}
+else
+{
+    <h4>@companyName has @Model.Count Warlords matches on record:</h4>
+}
+
+<div id="CompanyResultTable" class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Opponents</th>
+                <th>Score</th>
+                <th>Result</th>
+                <th>Match Date</th>
+                <th>Map</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClanBattle battle in Model)
+            {
+            <tr> 
+                @if(battle.enemyHeader != "[randoms]")
+                {
+                    <td class="companyName"><a asp-controller="ServiceRecord" asp-action="CompanyResults" asp-route-company=@battle.enemyHeader>
+                        @battle.enemyHeader
+                    </a></td>
+                }
+                else{
+                    <td>@battle.enemyHeader</td>
+                }
+                <td>@battle.score to @battle.enemyScore </td>
+                <td>@battle.result</td>
+                <td>@battle.matchDate.Month/@battle.matchDate.Day/@battle.matchDate.Year</td>
+                <td>@battle.mapName</td>
+                
+            </tr>
+             }
+        </tbody>
+    </table>
+</div>
