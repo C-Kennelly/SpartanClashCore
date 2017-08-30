@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/SpartanClashCore.csproj"
+                "${workspaceRoot}/SpartanClash.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
