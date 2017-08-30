@@ -6,8 +6,8 @@
     <title>@ViewBag.Title - Spartan Clash</title>
 
     <environment include="Development,Staging,Production">
-        <link rel="stylesheet" href="wwwroot/css/site.min.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="wwwroot/css/site.min.css" /> 
+        <<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
 
 
@@ -28,8 +28,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Leaderboards" >Leaderboards</a></li>
-                    <li><a asp-controller="ServiceRecord" >Service Record</a></li>
+                    <li><a asp-controller="Leaderboards" asp-action="Index">Leaderboards</a></li>
+                    <li><a asp-controller="ServiceRecord" asp-action="Index">Service Record</a></li>
                     <li><a asp-controller="Home" asp-action="About">About</a></li>
                 </ul>
             </div>
@@ -48,8 +48,11 @@
     </script>
 
     <div class="container body-content">
+        <hr />
         @RenderBody()
         <hr />
+    </div>
+    <div>
         <footer class="disclaimer">
             <p>
             &copy; @DateTime.Now.Year - This application is offered by SpartanClash.com, which is solely responsible for its content. It is not sponsored or endorsed by Microsoft. This application uses the Halo® Game Data API.
@@ -58,7 +61,7 @@
             Halo © @DateTime.Now.Year Microsoft Corporation. All rights reserved. Microsoft, Halo, and the Halo Logo are trademarks of the Microsoft group of companies.
             </p>
         </footer>
-    </div>
+    </div>    
     <environment names="Development,Staging,Production">
     </environment>
     @RenderSection("scripts", required: false)
