@@ -11,12 +11,14 @@ namespace SpartanClash.Models
         public virtual DbSet<TCompany2matches> TCompany2matches { get; set; }
         public virtual DbSet<TMapmetadata> TMapmetadata { get; set; }
 
+        public clashdbContext(DbContextOptions<clashdbContext> options)
+            : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=testspartanclash.cbr1lqfvizgf.us-west-2.rds.amazonaws.com;userid=aws_Read;password=readme1;database=clashdb");
             }
         }
 
