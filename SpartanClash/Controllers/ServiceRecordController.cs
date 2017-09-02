@@ -19,40 +19,35 @@ namespace SpartanClash.Controllers
         //GET: ServiceRecord
         public ActionResult Index() 
         {
-            using(var db = _clashdbContext) 
-            {
-                CompanyRegistry companyRegistry = new CompanyRegistry(_clashdbContext);
+            CompanyRegistry companyRegistry = new CompanyRegistry(_clashdbContext);
 
-                return View(companyRegistry);
-            }
+            return View(companyRegistry);
         }
 
         public ActionResult CompanyResults(string company) 
         {
-            using(var db = _clashdbContext) 
+
+            List<TClashdevset> companyMatches = _clashdbContext.TClashdevset
+                .Where(
+                    x => x.Team1Company1 == company
+                    || x.Team1Company2 == company
+                    || x.Team2Company1 == company
+                    || x.Team2Company2 == company
+                ).OrderBy(x => x.MatchCompleteDate).ThenBy(x => x.MapId).ToList();
+        
+            List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
+
+            foreach(TClashdevset match in companyMatches) 
             {
-                List<TClashdevset> companyMatches = db.TClashdevset
-                    .Where(
-                        x => x.Team1Company1 == company
-                        || x.Team1Company2 == company
-                        || x.Team2Company1 == company
-                        || x.Team2Company2 == company
-                    ).OrderBy(x => x.MatchCompleteDate).ThenBy(x => x.MapId).ToList();
-            
-                List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
-
-                foreach(TClashdevset match in companyMatches) 
-                {
-                    battles.Add(new ClanBattle(company, match));
-                }
-
-                if(battles.Count < 1)
-                {
-                    return View("NoCompaniesFound");
-                }
-
-                return View(battles);
+                battles.Add(new ClanBattle(company, match, _clashdbContext));
             }
+
+            if(battles.Count < 1)
+            {
+                return View("NoCompaniesFound");
+            }
+
+            return View(battles);
         }
 
         public ActionResult NoCompaniesFound(string company)

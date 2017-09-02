@@ -32,8 +32,10 @@ namespace SpartanClash.ViewModels
             _clashdbContext = context;
         }
 
-        public ClanBattle(string companyName, TClashdevset match)
+        public ClanBattle(string companyName, TClashdevset match, clashdbContext context)
         {
+            _clashdbContext = context;
+            
             primaryCompany = companyName;
             DetermineTeam(match);
             DetermineTeamSpecificComponents(match);
@@ -41,12 +43,9 @@ namespace SpartanClash.ViewModels
             SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
             matchDate =(DateTime)match.MatchCompleteDate;
 
-            using (var db = _clashdbContext)
-            {
-                TMapmetadata metadataRecord = db.TMapmetadata.Find(match.MapId);
-                mapName = metadataRecord.PrintableName;
-                mapImageURL = metadataRecord.ImageUrl;
-            }
+            TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
+            mapName = metadataRecord.PrintableName;
+            mapImageURL = metadataRecord.ImageUrl;
         }
 
         public string GetMapImageURL()

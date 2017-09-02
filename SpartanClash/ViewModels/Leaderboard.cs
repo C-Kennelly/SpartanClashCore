@@ -13,16 +13,13 @@ namespace SpartanClash.ViewModels
         {
             _clashdbContext = context;
 
-            using(var db = _clashdbContext)
+            List<TCompanies> rankedCompanies = _clashdbContext.TCompanies.Where(x => x.Rank > 0).OrderBy(x => x.Rank).ToList();
+
+            leaderboardItems = new List<LeaderboardItem>(rankedCompanies.Count);
+
+            foreach(TCompanies company in rankedCompanies) 
             {
-                List<TCompanies> rankedCompanies = db.TCompanies.Where(x => x.Rank > 0).OrderBy(x => x.Rank).ToList();
-
-                leaderboardItems = new List<LeaderboardItem>(rankedCompanies.Count);
-
-                foreach(TCompanies company in rankedCompanies) 
-                {
-                    leaderboardItems.Add(new LeaderboardItem(company));
-                }
+                leaderboardItems.Add(new LeaderboardItem(company));
             }
           
         }

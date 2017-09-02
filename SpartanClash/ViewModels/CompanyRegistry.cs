@@ -12,16 +12,14 @@ namespace SpartanClash.ViewModels
         public CompanyRegistry(clashdbContext context)
         {
             _clashdbContext = context;
-            using(var db = _clashdbContext)
+
+            List<TCompanies> allCompanies = _clashdbContext.TCompanies.OrderBy(x => x.Company).ToList();
+
+            registryItems = new List<CompanyRegistryItem> (allCompanies.Count);
+
+            foreach (TCompanies company in allCompanies)
             {
-                List<TCompanies> allCompanies = db.TCompanies.OrderBy(x => x.Company).ToList();
-
-                registryItems = new List<CompanyRegistryItem> (allCompanies.Count);
-
-                foreach (TCompanies company in allCompanies)
-                {
-                    registryItems.Add(new CompanyRegistryItem(company));
-                }
+                registryItems.Add(new CompanyRegistryItem(company));
             }
         }
     }
