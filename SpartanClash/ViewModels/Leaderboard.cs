@@ -6,13 +6,14 @@ namespace SpartanClash.ViewModels
 {
     public class Leaderboard
     {
-
+        clashdbContext _clashdbContext;
         public List<LeaderboardItem> leaderboardItems;
 
-        public Leaderboard()
+        public Leaderboard(clashdbContext context)
         {
-            
-            using(var db = new clashdbContext())
+            _clashdbContext = context;
+
+            using(var db = _clashdbContext)
             {
                 List<TCompanies> rankedCompanies = db.TCompanies.Where(x => x.Rank > 0).OrderBy(x => x.Rank).ToList();
 

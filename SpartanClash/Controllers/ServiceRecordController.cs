@@ -8,12 +8,20 @@ namespace SpartanClash.Controllers
 {
     public class ServiceRecordController : Controller
     {
+
+        clashdbContext _clashdbContext;
+
+        public ServiceRecordController(clashdbContext context) 
+        {
+            _clashdbContext = context;
+        }
+        
         //GET: ServiceRecord
         public ActionResult Index() 
         {
-            using(var db = new clashdbContext()) 
+            using(var db = _clashdbContext) 
             {
-                CompanyRegistry companyRegistry = new CompanyRegistry();
+                CompanyRegistry companyRegistry = new CompanyRegistry(_clashdbContext);
 
                 return View(companyRegistry);
             }
@@ -21,7 +29,7 @@ namespace SpartanClash.Controllers
 
         public ActionResult CompanyResults(string company) 
         {
-            using(var db = new clashdbContext()) 
+            using(var db = _clashdbContext) 
             {
                 List<TClashdevset> companyMatches = db.TClashdevset
                     .Where(

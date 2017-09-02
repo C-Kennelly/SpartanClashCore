@@ -3,7 +3,7 @@ using SpartanClash.Models;
 
 namespace SpartanClash.ViewModels
 {
-       public class ClanBattle
+    public class ClanBattle
     {
         const string missingCompanyValue = "NOCOMPANYFOUND";
         const string printableMissingCompanyValue = "[randoms]";
@@ -25,6 +25,13 @@ namespace SpartanClash.ViewModels
         private string enemyCompany1 { get; set; }
         private string enemyCompany2 { get; set; }
   
+        clashdbContext _clashdbContext;
+
+        public ClanBattle(clashdbContext context) 
+        {
+            _clashdbContext = context;
+        }
+
         public ClanBattle(string companyName, TClashdevset match)
         {
             primaryCompany = companyName;
@@ -34,7 +41,7 @@ namespace SpartanClash.ViewModels
             SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
             matchDate =(DateTime)match.MatchCompleteDate;
 
-            using (var db = new clashdbContext())
+            using (var db = _clashdbContext)
             {
                 TMapmetadata metadataRecord = db.TMapmetadata.Find(match.MapId);
                 mapName = metadataRecord.PrintableName;
