@@ -9,4 +9,4 @@ This repository contains all the functionality of Spartan Clash, but rewritten i
 
 I'm taking a step back from the code to do a little product development first, but you'll start to see changes made sometime in mid-November, if all goes well.
 
-If you're curious about how the data gets pulled down, you might take a look at the code [H5_DataPipeline](https://github.com/C-Kennelly/H5_DataPipeline).  If plain english is more your speed, you can also see an explanation in the [old repository](https://github.com/C-Kennelly/SpartanClash).
+If you're curious about how the data gets pulled down, you might take a look at the code in [H5_DataPipeline](https://github.com/C-Kennelly/H5_DataPipeline).  If plain english is more your speed, you can also see an explanation in the [old repository](https://github.com/C-Kennelly/SpartanClash).
