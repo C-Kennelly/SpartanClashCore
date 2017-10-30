@@ -29,20 +29,28 @@ namespace SpartanClash
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //Require HTTPS everywhere
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
 
+            //Make local db available to the application
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //Make clash db available to the application
             services.AddDbContext<clashdbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("clashDBConnection")));
 
+            //Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>{
+                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
+                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+            }); 
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
