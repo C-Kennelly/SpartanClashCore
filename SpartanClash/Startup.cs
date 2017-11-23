@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SpartanClash.Data;
 using SpartanClash.Models;
-using SpartanClash.Services;
-
-
+using Identity.Models;
+using Identity.EmailSender;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace SpartanClash
 {
@@ -28,12 +28,24 @@ namespace SpartanClash
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //{1} is controller, {0} is the action.  Use {2} for area.
+            //https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationFormats.Clear();
+                options.ViewLocationFormats.Add("/Components/{1}/Views/{0}" + RazorViewEngine.ViewExtension);
+                options.ViewLocationFormats.Add("/Components/_SharedViews/{0}" + RazorViewEngine.ViewExtension);
 
-                        //Require HTTPS everywhere
-                        services.Configure<MvcOptions>(options =>
-                        {
-                            options.Filters.Add(new RequireHttpsAttribute());
-                        });
+                options.AreaViewLocationFormats.Clear();
+                options.AreaViewLocationFormats.Add("/Components/{2}/{1}/Views/{0}" + RazorViewEngine.ViewExtension);
+                options.AreaViewLocationFormats.Add("/Components/_SharedViews/{0}" + RazorViewEngine.ViewExtension);
+            });
+
+            //Require HTTPS everywhere
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
 
             //Make clash db available to the application
             services.AddDbContext<clashdbContext>(options =>
@@ -80,15 +92,19 @@ namespace SpartanClash
                 app.UseExceptionHandler("/Home/Error");
             }
 
- //           var options = new RewriteOptions()
- //               .AddRedirectToHttps();
+            var options = new RewriteOptions()
+                .AddRedirectToHttps();
 
             app.UseStaticFiles();
 
- //           app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{company?}");

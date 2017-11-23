@@ -1,0 +1,34 @@
+@model SpartanClash.ViewModels.CompanyRegistry
+@{
+    ViewData["Title"] = "ServiceRecord";
+    Layout = "~/Components/_SharedViews/_Layout.cshtml";
+}
+
+<h1><u>Service Record</u></h1>
+
+
+<h4>Spartan Clash has Service Records for @Model.registryItems.Count companies:</h4>
+
+
+<div class="allCompanies">
+
+    @foreach (SpartanClash.ViewModels.CompanyRegistryItem item in Model.registryItems)
+    {
+
+        {
+            <div class="leaderboardItem">
+                <span class="companyName"> 
+                    <a asp-controller="ServiceRecord" asp-action="CompanyResults" asp-route-company=@item.companyName>@item.companyName</a> 
+                </span>
+            </div>
+
+            <p></p>
+        }
+    }
+    
+
+
+
+</div>
+
+

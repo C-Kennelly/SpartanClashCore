@@ -23,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="app\" />
-    <Folder Include="Components\DailyLoopTest\" />
+    <Folder Include="Components\ServiceRecord\Models\" />
   </ItemGroup>
 
 </Project>
