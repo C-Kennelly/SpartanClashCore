@@ -22,4 +22,9 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="Components\DailyLoopTest\" />
+  </ItemGroup>
+
 </Project>

@@ -4,6 +4,7 @@ using SpartanClash.ViewModels;
 
 namespace SpartanClash.Controllers
 {
+/*
     public class LeaderboardsController : Controller 
     {
 
@@ -21,5 +22,5 @@ namespace SpartanClash.Controllers
             return View(leaderboard);            
         }
     }
-    
+*/   
 }

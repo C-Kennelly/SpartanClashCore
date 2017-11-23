@@ -29,19 +29,24 @@ namespace SpartanClash
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //Require HTTPS everywhere
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
-
-            //Make local db available to the application
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                        //Require HTTPS everywhere
+                        services.Configure<MvcOptions>(options =>
+                        {
+                            options.Filters.Add(new RequireHttpsAttribute());
+                        });
 
             //Make clash db available to the application
             services.AddDbContext<clashdbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("clashDBConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("clashDBCredsConnection")));
+
+            //Make local db available to the application
+            //            services.AddDbContext<ApplicationDbContext>(options =>
+            //                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
 
             //Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -75,12 +80,12 @@ namespace SpartanClash
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            var options = new RewriteOptions()
-                .AddRedirectToHttps();
+ //           var options = new RewriteOptions()
+ //               .AddRedirectToHttps();
 
             app.UseStaticFiles();
 
-            app.UseAuthentication();
+ //           app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

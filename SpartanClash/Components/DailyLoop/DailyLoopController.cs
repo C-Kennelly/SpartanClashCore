@@ -6,20 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpartanClash.Models;
 
-namespace SpartanClash.Controllers
+namespace DailyLoop
 {
-    public class HomeController : Controller
+    public class DailyLoopController : Controller
     {
+        [Route("[controller]")]
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(DailyLoop.DailyLoopController.Index), "DailyLoop");
-            //return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 

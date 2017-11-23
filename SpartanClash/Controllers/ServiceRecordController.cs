@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SpartanClash.Models;
 using SpartanClash.ViewModels;
-
+/*
 namespace SpartanClash.Controllers
 {
     public class ServiceRecordController : Controller
@@ -56,5 +56,5 @@ namespace SpartanClash.Controllers
         }
  
     }
-
 }
+*/
