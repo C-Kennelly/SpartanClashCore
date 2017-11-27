@@ -1,7 +1,7 @@
 pipeline {  
   agent any
 
-/*  environment {
+  environment {
     applicationName = 'SpartanClash'
     applicatonDisplayName = 'Spartan Clash'
     containerNameSpace = 'ckennelly'
@@ -10,7 +10,7 @@ pipeline {
     jenkinsServiceAccount = 'jenkinssvc'
     acceptanceServerIP = '138.197.202.218'
   }
-*/
+
   stages {
     stage('Build & Push') {
           steps {
