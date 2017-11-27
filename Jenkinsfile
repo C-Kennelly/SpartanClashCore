@@ -16,9 +16,9 @@ pipeline {
   stages {
     stage('Build & Push') {
           steps {
-            slackSend (color: 'good', message: "'${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
-            sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
+            slackSend (color: 'good', message: "${applicationDisplayName} [${env.BUILD_NUMBER}] started building.  View status at ${env.BUILD_URL}")
+            sh 'docker build -t ${containerNameSpace}/${containerName}:${env.BUILD_NUMBER} ${dockerBuildFolder}'
+            sh 'docker push ${containerNameSpace}/${containerName}:${env.BUILD_NUMBER}'
           }
     }
     stage('Deploy') {
@@ -26,7 +26,7 @@ pipeline {
         stage('Pull New') {
           steps {
             //slackSend(message: "'${applicationDisplayName}' began deployment.", color: 'good')
-            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker pull ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
+            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker pull ${containerNameSpace}/${containerName}:${env.BUILD_NUMBER}'
           }
         }
         stage('Clean Old') {
@@ -42,7 +42,7 @@ pipeline {
     stage('Start Application') {
       steps {
         //slackSend(message: "'${applicationDisplayName}' is starting...", color: 'good')
-        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
+        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${env.BUILD_NUMBER}'
       }
     }
   }
