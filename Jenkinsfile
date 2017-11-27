@@ -1,14 +1,14 @@
-pipeline {
-  def applicationName = 'SpartanClash'
-  def applicatonDisplayName = 'Spartan Clash'
-  
-  def containerNameSpace = 'ckennelly'
-  def containerName = 'spartanclash'
-  def dockerBuildFolder = 'SpartanClash'
+def applicationName = 'SpartanClash'
+def applicatonDisplayName = 'Spartan Clash'
 
-  def jenkinsServiceAccount = 'jenkinssvc'
-  def acceptanceServerIP = '138.197.202.218'
-  
+def containerNameSpace = 'ckennelly'
+def containerName = 'spartanclash'
+def dockerBuildFolder = 'SpartanClash'
+
+def jenkinsServiceAccount = 'jenkinssvc'
+def acceptanceServerIP = '138.197.202.218'
+
+pipeline {  
   agent any
   
   stages {
