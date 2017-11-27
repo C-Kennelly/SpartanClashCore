@@ -29,10 +29,11 @@ pipeline {
             sh 'ssh jenkinssvc@138.197.202.218 docker pull ckennelly/spartanclash:${BUILD_NUMBER}'            
           }
         }
-        stage('Stop Old') {
+        stage('Clean Old') {
           steps {
             sh 'ssh jenkinssvc@138.197.202.218 docker stop SpartanClash'
             sh 'ssh jenkinssvc@138.197.202.218 docker rm SpartanClash'
+            sh 'ssh jenkinssvc@128.197.202.218 docker rm $(docker ps -a -q -f status=exited)'
           }
         }
       }
