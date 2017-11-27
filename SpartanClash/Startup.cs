@@ -42,10 +42,13 @@ namespace SpartanClash
             });
 
             //Require HTTPS everywhere
+/****** HTTPS disabled while we deal with certs. *****************
+
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
+*****************************************************************/
 
             //Make clash db available to the application
             services.AddDbContext<clashdbContext>(options =>
@@ -54,11 +57,7 @@ namespace SpartanClash
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("clashDBCredsConnection")));
 
-            //Make local db available to the application
-            //            services.AddDbContext<ApplicationDbContext>(options =>
-            //                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-
+/****** Authentication disabled while we deal with certs. *****************
 
             //Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -68,6 +67,8 @@ namespace SpartanClash
                 microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
                 microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
             }); 
+
+****************************************************************************/
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -92,12 +93,21 @@ namespace SpartanClash
                 app.UseExceptionHandler("/Home/Error");
             }
 
+/****** HTTPS disabled while we deal with certs. *****************
+
             var options = new RewriteOptions()
                 .AddRedirectToHttps();
 
+*******************************************************************/
+
             app.UseStaticFiles();
 
+
+/****** Authentication disabled while we deal with certs. *****************
+
             app.UseAuthentication();
+************************************************************************/
+
 
             app.UseMvc(routes =>
             {
