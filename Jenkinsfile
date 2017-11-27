@@ -1,16 +1,18 @@
-def applicationName = 'SpartanClash'
-def applicatonDisplayName = 'Spartan Clash'
-
-def containerNameSpace = 'ckennelly'
-def containerName = 'spartanclash'
-def dockerBuildFolder = 'SpartanClash'
-
-def jenkinsServiceAccount = 'jenkinssvc'
-def acceptanceServerIP = '138.197.202.218'
-
 pipeline {  
   agent any
-  
+
+  script {
+    def applicationName = 'SpartanClash'
+    def applicatonDisplayName = 'Spartan Clash'
+
+    def containerNameSpace = 'ckennelly'
+    def containerName = 'spartanclash'
+    def dockerBuildFolder = 'SpartanClash'
+
+    def jenkinsServiceAccount = 'jenkinssvc'
+    def acceptanceServerIP = '138.197.202.218'
+  }
+    
   stages {
     stage('Build & Push') {
           steps {
