@@ -15,15 +15,16 @@ pipeline {
   stages {
     stage('Build & Push') {
           steps {
+            slackSend(message: "'${applicationDisplayName}' began building", color: 'good')
             sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
     }
-    post {
-      failure {
-        slackSend(message: "'${applicationDisplayName}'' failed during build!", color: 'danger')
-      }
-    }
+//    post {
+//      failure {
+//        slackSend(message: "'${applicationDisplayName}'' failed during build!", color: 'danger')
+//      }
+//    }
 
     stage('Deploy') {
       parallel {
@@ -42,10 +43,10 @@ pipeline {
         }
       }
     }
-    post {
-      failure {
-        slackSend(message: "'${applicationDisplayName}' failed during deployment!", color: 'danger')
-      }
+//    post {
+//      failure {
+//        slackSend(message: "'${applicationDisplayName}' failed during deployment!", color: 'danger')
+//      }
     }
 
     stage('Start Application') {
@@ -54,13 +55,13 @@ pipeline {
         sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
     }
-    post {
-      success {
-        slackSend(message: "'${applicationDisplayName}' is live at http://138.197.202.218", color: 'good')
-      }
-      failure {
-        slackSend(message: "'${applicationDisplayName}' failed while starting!", color: 'danger')
-      }
+//    post {
+//      success {
+//        slackSend(message: "'${applicationDisplayName}' is live at http://138.197.202.218", color: 'good')
+//      }
+//      failure {
+//        slackSend(message: "'${applicationDisplayName}' failed while starting!", color: 'danger')
+//      }
     }
   }
 }
