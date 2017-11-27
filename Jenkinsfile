@@ -12,6 +12,9 @@ pipeline {
           steps {
             sh 'docker build -t ckennelly/spartanclash:${BUILD_NUMBER} SpartanClash'
             sh 'docker push ckennelly/spartanclash:${BUILD_NUMBER}'
+            failure {
+              slackSend(message: 'Spartan Clash failed building and pushing image.', color: 'danger')
+            }
           }
         }
 
@@ -26,7 +29,10 @@ pipeline {
         }
         stage('Pull New') {
           steps {
-            sh 'ssh jenkinssvc@138.197.202.218 docker pull ckennelly/spartanclash:${BUILD_NUMBER}'            
+            sh 'ssh jenkinssvc@138.197.202.218 docker pull ckennelly/spartanclash:${BUILD_NUMBER}'
+            failure {
+              slackSend(message: 'Spartan Clash failed pulling new image.', color: 'danger')
+            }
           }
         }
         stage('Clean Old') {
@@ -34,6 +40,9 @@ pipeline {
             sh 'ssh jenkinssvc@138.197.202.218 docker stop SpartanClash'
             sh 'ssh jenkinssvc@138.197.202.218 docker rm SpartanClash'
             sh 'ssh jenkinssvc@128.197.202.218 docker rm $(docker ps -a -q -f status=exited)'
+            failure {
+              slackSend(message: 'Spartan Clash failed cleaning old images.', color: 'danger')
+            }
           }
         }
       }
