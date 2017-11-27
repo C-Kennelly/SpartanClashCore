@@ -4,9 +4,11 @@ pipeline {
   environment {
     applicationName = 'SpartanClash'
     applicatonDisplayName = 'Spartan Clash'
+
     containerNameSpace = 'ckennelly'
     containerName = 'spartanclash'
     dockerBuildFolder = 'SpartanClash'
+    
     jenkinsServiceAccount = 'jenkinssvc'
     acceptanceServerIP = '138.197.202.218'
   }
@@ -14,7 +16,7 @@ pipeline {
   stages {
     stage('Build & Push') {
           steps {
-            //slackSend(message: "'${applicationDisplayName}' began building", color: 'good')
+            slackSend(message: "'${applicationDisplayName}' began building", color: 'good')
             sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
