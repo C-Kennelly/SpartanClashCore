@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('Build & Push') {
           steps {
-            slackSend(message: '${env.JOB_NAME} began building', color: 'good')
+            slackSend (color: 'good', message: "'${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
