@@ -35,6 +35,11 @@ pipeline {
             slackSend (color: '#FFFF00', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] began deployment.")
             sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker pull ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
+          post {
+            failure {
+              slackSend (color: 'danger', message: "Failure while deploying ${env.JOB_NAME} [${env.BUILD_NUMBER}].  Problems pulling the new container.")
+            }
+          }
         }
         stage('Clean Old') {
           steps {
@@ -42,11 +47,9 @@ pipeline {
             sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker rm ${applicationName}'
             //sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker rm $(docker ps -a -q -f status=exited)'
           }
-        }
-      }
-      post {
-        failure {
-          slackSend (color: 'danger', message: "Failure while deploying ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
+          post {
+            slackSend (color: 'danger', message: "Failure while deploying ${env.JOB_NAME} [${env.BUILD_NUMBER}].  Problems cleaning the acceptance server.")
+          }
         }
       }
     }
@@ -57,9 +60,6 @@ pipeline {
         sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
       post {
-        success {
-          slackSend (color: 'good', message: "'/giphy happy Donald Trump'")
-        }
         failure {
           slackSend (color: 'danger', message: "Failure while starting ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
         }
@@ -70,9 +70,6 @@ pipeline {
       post {
         success {
           slackSend (color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
-        }
-        failure {
-          slackSend (color: 'danger', message: "'/giphy sad Donald Trump'")
         }
   }
   
