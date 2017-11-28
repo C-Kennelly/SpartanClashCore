@@ -22,7 +22,7 @@ pipeline {
           }
     }
     post {
-      failure() {
+      failure {
         slackSend (color: 'danger', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during Build & Push.")
       }
     }
