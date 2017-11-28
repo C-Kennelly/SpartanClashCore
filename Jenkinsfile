@@ -23,7 +23,7 @@ pipeline {
           }
           post {
             failure {
-              slackSend(color: 'danger', message: "Failure while building ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
+              slackSend (color: 'danger', message: "Failure while building ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
             }
           }
     }
@@ -44,6 +44,11 @@ pipeline {
           }
         }
       }
+      post {
+        failure {
+          slackSend (color: 'danger', message: "Failure while deploying ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
+        }
+      }
     }
 
     stage('Start Application') {
@@ -53,10 +58,10 @@ pipeline {
       }
       post {
         success {
-          slackSend(color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
+          slackSend (color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
         failure {
-          slackSend(color: 'danger', message: "Failure while starting ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
+          slackSend (color: 'danger', message: "Failure while starting ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
         }
       }
     }
