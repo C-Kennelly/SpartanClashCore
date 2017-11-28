@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('Build & Push') {
           steps {
-            slackSend (color: '#FFFF00', message: "Starting build for '${env.JOB_NAME} [${env.BUILD_NUMBER}'']. View status at (${env.BUILD_URL})")
+            slackSend (color: '#FFFF00', message: "Starting build for ${env.JOB_NAME} [${env.BUILD_NUMBER}]. View status at (${env.BUILD_URL})")
             sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
@@ -46,7 +46,7 @@ pipeline {
       }
       post {
         success {
-          slackSend(message: "Spartan CLash is live at http://138.197.202.218", color: 'good')
+          slackSend(message: "Success! Spartan Clash is live at http://138.197.202.218", color: 'good')
         }
       }
     }
