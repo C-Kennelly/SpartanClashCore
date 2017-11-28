@@ -44,6 +44,11 @@ pipeline {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
         sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
+      post {
+        success {
+          slackSend(message: "Spartan CLash is live at http://138.197.202.218", color: 'good')
+        }
+      }
     }
   }
 }
@@ -62,7 +67,7 @@ pipeline {
     
 //    post {
 //      success {
-//        slackSend(message: "'${applicationDisplayName}' is live at http://138.197.202.218", color: 'good')
+//        
 //      }
 //      failure {
 //        slackSend(message: "'${applicationDisplayName}' failed while starting!", color: 'danger')
