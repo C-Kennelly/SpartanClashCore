@@ -58,7 +58,7 @@ pipeline {
       }
       post {
         success {
-          slackSend (color: 'good', message: "/giphy happy Donald Trump")
+          slackSend (color: 'good', message: "'/giphy happy Donald Trump'")
         }
         failure {
           slackSend (color: 'danger', message: "Failure while starting ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
@@ -72,7 +72,7 @@ pipeline {
           slackSend (color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
         failure {
-          slackSend (color: 'danger', message: "/giphy sad Donald Trump")
+          slackSend (color: 'danger', message: "'/giphy sad Donald Trump'")
         }
   }
   
