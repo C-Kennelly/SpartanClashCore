@@ -14,6 +14,7 @@ pipeline {
   }
 
   stages {
+
     stage('Build & Push') {
           steps {
             slackSend (color: '#FFFF00', message: "Starting build for ${env.JOB_NAME} [${env.BUILD_NUMBER}]. View status at (${env.BUILD_URL})")
@@ -21,13 +22,7 @@ pipeline {
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
     }
-/*
-    post {
-      failure {
-        slackSend (color: 'danger', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during Build & Push.")
-      }
-    }
-*/
+
     stage('Deploy') {
       parallel {
         stage('Pull New') {
@@ -45,13 +40,7 @@ pipeline {
         }
       }
     }
-/*    
-    post {
-      failure {
-        slackSend (color: 'danger', message:  "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during deployment.")
-      }
-    }
-*/
+
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
@@ -61,32 +50,9 @@ pipeline {
         success {
           slackSend(color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
-        failure {
-          slackSend(color: 'danger', "Spartan Clash failed to start.")
-        }
       }
     }
+
   }
+  
 }
-
-//    post {
-//      failure {
-//        slackSend(message: "'${applicationDisplayName}'' failed during build!", color: 'danger')
-//      }
-//    }
-
-//    post {
-//      failure {
-//        slackSend(message: "'${applicationDisplayName}' failed during deployment!", color: 'danger')
-//      }
-//    }
-    
-//    post {
-//      success {
-//        
-//      }
-//      failure {
-//        slackSend(message: "'${applicationDisplayName}' failed while starting!", color: 'danger')
-//      }
-//    }
-
