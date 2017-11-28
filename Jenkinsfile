@@ -21,12 +21,13 @@ pipeline {
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
     }
+/*
     post {
       failure {
         slackSend (color: 'danger', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during Build & Push.")
       }
     }
-
+*/
     stage('Deploy') {
       parallel {
         stage('Pull New') {
@@ -44,12 +45,13 @@ pipeline {
         }
       }
     }
+/*    
     post {
       failure {
         slackSend (color: 'danger', message:  "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during deployment.")
       }
     }
-
+*/
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
