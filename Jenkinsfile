@@ -21,11 +21,17 @@ pipeline {
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
     }
+    post {
+      failure() {
+        slackSend (color: 'danger', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during Build & Push.")
+      }
+    }
+
     stage('Deploy') {
       parallel {
         stage('Pull New') {
           steps {
-            slackSend (color: '#FFFF00', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] began deployment.  ")
+            slackSend (color: '#FFFF00', message: "${env.JOB_NAME} [${env.BUILD_NUMBER}] began deployment.")
             sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker pull ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
         }
@@ -38,6 +44,11 @@ pipeline {
         }
       }
     }
+    post {
+      failure {
+        slackSend (color: 'danger', message:  "${env.JOB_NAME} [${env.BUILD_NUMBER}] failed during deployment.")
+      }
+    }
 
     stage('Start Application') {
       steps {
@@ -48,9 +59,21 @@ pipeline {
         success {
           slackSend(message: "Success! Spartan Clash is live at http://138.197.202.218", color: 'good')
         }
+        failure {
+          slackSend(color: 'danger', "Spartan Clash failed to start.")
+        }
       }
     }
   }
+  post {
+    success {
+      slackSend(message: "/giphy happy Donald Trump")
+    }
+    failure {
+      slackSend(message: "/giphy sad Donald Trump")
+    }
+  }
+
 }
 
 //    post {
