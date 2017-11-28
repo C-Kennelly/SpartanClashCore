@@ -57,7 +57,7 @@ pipeline {
       }
       post {
         success {
-          slackSend(message: "Success! Spartan Clash is live at http://138.197.202.218", color: 'good')
+          slackSend(color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
         failure {
           slackSend(color: 'danger', "Spartan Clash failed to start.")
@@ -65,15 +65,6 @@ pipeline {
       }
     }
   }
-  post {
-    success {
-      slackSend(message: "/giphy happy Donald Trump")
-    }
-    failure {
-      slackSend(message: "/giphy sad Donald Trump")
-    }
-  }
-
 }
 
 //    post {
