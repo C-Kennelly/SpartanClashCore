@@ -50,6 +50,9 @@ pipeline {
         success {
           slackSend(color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
+        failure {
+          slackSend(color: 'danger', message: "Failure! Spartan Clash failed while starting.")
+        }
       }
     }
 
