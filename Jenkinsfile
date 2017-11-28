@@ -21,6 +21,11 @@ pipeline {
             sh 'docker build -t ${containerNameSpace}/${containerName}:${BUILD_NUMBER} ${dockerBuildFolder}'
             sh 'docker push ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
           }
+          post {
+            failure {
+              slackSend(color: 'danger', message: "Failure while building ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
+            }
+          }
     }
 
     stage('Deploy') {
@@ -51,7 +56,7 @@ pipeline {
           slackSend(color: 'good', message: "Success! Spartan Clash is live at http://138.197.202.218")
         }
         failure {
-          slackSend(color: 'danger', message: "Failure! Spartan Clash failed while starting.")
+          slackSend(color: 'danger', message: "Failure while starting ${env.JOB_NAME} [${env.BUILD_NUMBER}].")
         }
       }
     }
