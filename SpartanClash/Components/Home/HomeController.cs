@@ -12,8 +12,8 @@ namespace Home
     {
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(DailyLoop.DailyLoopController.Index), "DailyLoop");
-            //return View();
+            //return RedirectToAction(nameof(DailyLoop.DailyLoopController.Index), "DailyLoop");
+            return View();
         }
 
         [Route("[action]")]
