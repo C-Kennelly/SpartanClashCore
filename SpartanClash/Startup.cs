@@ -117,7 +117,7 @@ namespace SpartanClash
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{company?}");
+                    template: "{controller=Home}/{action=Index}");
             });
         }
     }

@@ -16,10 +16,15 @@ namespace Home
             return View();
         }
 
-        [Route("[action]")]
-        public IActionResult Pilot()
+        public IActionResult Autocomplete(string term) 
         {
-            return View("Index");
+            var items = new[] {"Apple", "Pear", "Banana", "Pineapple", "Peach"};
+
+            var filteredItems = items.Where(
+                item => item.IndexOf(term, 
+                StringComparison.InvariantCultureIgnoreCase) >= 0
+            );
+            return Json(filteredItems);
         }
 
         public IActionResult About()
