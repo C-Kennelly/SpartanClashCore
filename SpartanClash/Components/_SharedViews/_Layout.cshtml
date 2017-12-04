@@ -13,14 +13,7 @@
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
-    <script>
-        $(function () {
-            $("#tags").autocomplete({
-                source: "https://localhost:44306/Home/Autocomplete"
 
-            });
-        });
-    </script>
 <!--    </environment>  -->
 <!--    <environment exclude="Development">
           <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -72,21 +65,13 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer class="disclaimer">
-            <p>
-                &copy; @DateTime.Now.Year - This application is offered by SpartanClash.com, which is solely responsible for its content. It is not sponsored or endorsed by Microsoft. This application uses the Halo® Game Data API.
-                <br />
-                <br />
-                Halo © @DateTime.Now.Year Microsoft Corporation. All rights reserved. Microsoft, Halo, and the Halo Logo are trademarks of the Microsoft group of companies.
-            </p>
-        </footer>
     </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/position.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -102,6 +87,7 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

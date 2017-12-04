@@ -2,18 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <h2>Fight together, Spartan.<br></h2>
 
-    <div class="ui-widget">
-        <label for="tags">Companies: </label>
-        <input id="tags">
-    </div>
-    
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+
+<script>
+        $(function () {
+            $("#companies").autocomplete({
+                source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
+                position: { my: "left top", at: "left bottom", collision: "flipfit" }
+            });
+        });
+</script>
+
+<div class="jumbotron">
+    <h2>Fight together, Spartan.<br></h2>    
 </div>
 
-<div class="body-content">
-    <p>Spartan Clash tracks every game your Spartan Company plays together and puts them in one place.</p>
-    <br />
-    <p>We're tracking Warzone Warlords matches right now - view our leaderboards to find rival Companies.</p>
+<div class="ui-widget">
+    <label for="companies">Companies: </label>
+    <input id="companies">
 </div>
