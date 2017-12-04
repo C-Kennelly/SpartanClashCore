@@ -11,7 +11,7 @@
         $(function () {
             $("#companies").autocomplete({
                 source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
-                position: { my: "left top", at: "left bottom", collision: "flipfit" }
+                position: { my: "left top", at: "left bottom", collision: "none" }
             });
         });
 </script>
