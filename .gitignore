@@ -106,7 +106,7 @@ ipch/
 *.vspx
 *.sap
 
-SpartanClash/appsettings.json
+//SpartanClash/appsettings.json
 
 # TFS 2012 Local Workspace
 $tf/
@@ -279,5 +279,5 @@ __pycache__/
 *.pyc
 obj/Debug/netcoreapp2.0/SpartanClashCore.csproj.CoreCompileInputs.cache
 obj/Debug/netcoreapp2.0/SpartanClashCore.csproj.CoreCompileInputs.cache
-SpartanClash/appsettings.json
-SpartanClash/appsettings.json
+//SpartanClash/appsettings.json
+//SpartanClash/appsettings.json
