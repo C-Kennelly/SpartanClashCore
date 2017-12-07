@@ -22,18 +22,11 @@ namespace Home
 
         public IActionResult Index()
         {
-            //return RedirectToAction(nameof(DailyLoop.DailyLoopController.Index), "DailyLoop");
             return View();
         }
 
         public IActionResult CompanyAutocomplete(string term) 
         {
-            //var items = new[] {"Apple", "Pear", "Banana", "Pineapple", "Peach"};
-            //
-            //var filteredItems = items.Where(
-            //    item => item.IndexOf(term,
-            //    StringComparison.InvariantCultureIgnoreCase) >= 0
-            //);
 
             using (var db = _clashdbContext)
             {
