@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpartanClash.Data;
@@ -36,12 +37,15 @@ namespace Home
 
             using (var db = _clashdbContext)
             {
-                var companies = db.TCompanies.ToArray();
+                //var companies = db.TCompanies.SelectMany(record => record.Company).ToArray();
+
+                var companies = from t in db.TCompanies
+                                select t.Company;
 
                 var filteredCompanies = companies.Where(
-                    company => company.Company.IndexOf(term, 
+                    company => company.IndexOf(term,
                     StringComparison.InvariantCultureIgnoreCase) >= 0
-                );
+                ).ToList();
 
                 return Json(filteredCompanies);
             }
