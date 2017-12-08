@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SpartanClash.Models.ClashDB;
 using ServiceRecord.ViewModels;
+using System.Threading.Tasks;
 
 namespace ServiceRecord
 {
@@ -39,12 +40,30 @@ namespace ServiceRecord
                 return View("NoCompaniesFound");
             }
 
+
+            Task.Run(() => LogCompanySearch(company));
+
             return View(battles);
         }
 
         public ActionResult NoCompaniesFound(string company)
         {
             return View(company);
+        }
+
+        private void LogCompanySearch(string companyName) 
+        {
+            using (var db = _clashdbContext)
+            {
+                TCompanies companyRecord = db.TCompanies.Find(companyName);
+
+                if (companyRecord != null)
+                {
+                    //Not Thread safe, but losing a transaction here and there is unimportant.
+                    companyRecord.TimesSearched++;
+                    db.SaveChanges();
+                }
+            }
         }
 
     }
