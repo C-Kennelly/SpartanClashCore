@@ -1,5 +1,5 @@
 ﻿using System;
-using SpartanClash.Models;
+using SpartanClash.Models.ClashDB;
 using SpartanClash.Data;
 
 namespace ServiceRecord.ViewModels

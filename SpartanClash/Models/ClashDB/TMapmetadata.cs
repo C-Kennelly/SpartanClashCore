@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SpartanClash.Models
+namespace SpartanClash.Models.ClashDB
 {
     public partial class TMapmetadata
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SpartanClash.Models
+namespace SpartanClash.Models.ClashDB
 {
     public partial class TCompanies
     {
@@ -16,6 +16,7 @@ namespace SpartanClash.Models
         public int? Losses { get; set; }
         public int? TotalMatches { get; set; }
         public double? WinPercent { get; set; }
+        public int TimesSearched { get; set; }
 
         public ICollection<TCompany2matches> TCompany2matches { get; set; }
     }

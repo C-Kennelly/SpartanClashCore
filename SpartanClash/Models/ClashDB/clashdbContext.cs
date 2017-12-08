@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SpartanClash.Models;
 
-namespace SpartanClash.Models
+namespace SpartanClash.Models.ClashDB
 {
     public partial class clashdbContext : DbContext
     {
@@ -16,6 +15,7 @@ namespace SpartanClash.Models
             : base(options)
         {
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -35,9 +35,7 @@ namespace SpartanClash.Models
                     .HasName("MatchId")
                     .IsUnique();
 
-                entity.Property(e => e.MatchId)
-                    .HasMaxLength(64)
-                    .ValueGeneratedNever();
+                entity.Property(e => e.MatchId).HasMaxLength(64);
 
                 entity.Property(e => e.GameBaseVariantId)
                     .HasColumnName("GameBaseVariantID")
@@ -93,7 +91,7 @@ namespace SpartanClash.Models
 
                 entity.Property(e => e.Status)
                     .HasColumnType("int(11)")
-                    .HasDefaultValueSql("0");
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.Team1Company1)
                     .HasColumnName("Team1_Company1")
@@ -106,11 +104,9 @@ namespace SpartanClash.Models
                 entity.Property(e => e.Team1Rank)
                     .HasColumnName("Team1_Rank")
                     .HasColumnType("int(11)")
-                    .HasDefaultValueSql("-1");
+                    .HasDefaultValueSql("'-1'");
 
-                entity.Property(e => e.Team1Score)
-                    .HasColumnName("Team1_Score")
-                    .HasColumnType("int(11) unsigned");
+                entity.Property(e => e.Team1Score).HasColumnName("Team1_Score");
 
                 entity.Property(e => e.Team2Company1)
                     .HasColumnName("Team2_Company1")
@@ -123,11 +119,9 @@ namespace SpartanClash.Models
                 entity.Property(e => e.Team2Rank)
                     .HasColumnName("Team2_Rank")
                     .HasColumnType("int(11)")
-                    .HasDefaultValueSql("-1");
+                    .HasDefaultValueSql("'-1'");
 
-                entity.Property(e => e.Team2Score)
-                    .HasColumnName("Team2_Score")
-                    .HasColumnType("int(11) unsigned");
+                entity.Property(e => e.Team2Score).HasColumnName("Team2_Score");
             });
 
             modelBuilder.Entity<TCompanies>(entity =>
@@ -142,8 +136,7 @@ namespace SpartanClash.Models
 
                 entity.Property(e => e.Company)
                     .HasColumnName("company")
-                    .HasMaxLength(32)
-                    .ValueGeneratedNever();
+                    .HasMaxLength(32);
 
                 entity.Property(e => e.Losses)
                     .HasColumnName("losses")
@@ -152,7 +145,12 @@ namespace SpartanClash.Models
                 entity.Property(e => e.Rank)
                     .HasColumnName("rank")
                     .HasColumnType("int(64)")
-                    .HasDefaultValueSql("-1");
+                    .HasDefaultValueSql("'-1'");
+
+                entity.Property(e => e.TimesSearched)
+                    .HasColumnName("times_searched")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.TotalMatches)
                     .HasColumnName("total_matches")
@@ -205,8 +203,7 @@ namespace SpartanClash.Models
 
                 entity.Property(e => e.MapId)
                     .HasColumnName("mapId")
-                    .HasMaxLength(64)
-                    .ValueGeneratedNever();
+                    .HasMaxLength(64);
 
                 entity.Property(e => e.ImageUrl)
                     .HasColumnName("imageURL")

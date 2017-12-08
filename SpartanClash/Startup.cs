@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SpartanClash.Data;
-using SpartanClash.Models;
+using SpartanClash.Models.ClashDB;
 using Identity.Models;
 using Identity.EmailSender;
 using Microsoft.AspNetCore.Mvc.Razor;

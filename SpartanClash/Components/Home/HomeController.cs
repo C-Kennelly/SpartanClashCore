@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpartanClash.Data;
-using SpartanClash.Models;
+using SpartanClash.Models.ClashDB;
 using SharedViews.Models;
 
 namespace Home

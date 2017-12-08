@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SpartanClash.Models
+namespace SpartanClash.Models.ClashDB
 {
     public partial class TClashdevset
     {
@@ -33,8 +33,8 @@ namespace SpartanClash.Models
         public string Team2Company2 { get; set; }
         public int Team1Rank { get; set; }
         public int Team2Rank { get; set; }
-        public int? Team1Score { get; set; }
-        public int? Team2Score { get; set; }
+        public uint? Team1Score { get; set; }
+        public uint? Team2Score { get; set; }
         public int Status { get; set; }
 
         public ICollection<TCompany2matches> TCompany2matches { get; set; }
