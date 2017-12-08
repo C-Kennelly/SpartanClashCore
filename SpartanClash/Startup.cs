@@ -57,6 +57,7 @@ namespace SpartanClash
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("clashDBCredsConnection")));
 
+            services.AddTransient<UserBehaviorTracking.UserBehaviorTracker>();
 /****** Authentication disabled while we deal with certs. *****************
 
             //Identity

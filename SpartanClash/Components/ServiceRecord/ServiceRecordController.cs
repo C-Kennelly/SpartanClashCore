@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using SpartanClash.Models.ClashDB;
-using ServiceRecord.ViewModels;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+using ServiceRecord.ViewModels;
+
+using SpartanClash.Models.ClashDB;
+using UserBehaviorTracking;
 
 namespace ServiceRecord
 {
@@ -11,10 +14,12 @@ namespace ServiceRecord
     {
 
         clashdbContext _clashdbContext;
+        UserBehaviorTracker _userBehaviorTracker;
 
-        public ServiceRecordController(clashdbContext context)
+        public ServiceRecordController(clashdbContext context, UserBehaviorTracker behaviorTracker)
         {
             _clashdbContext = context;
+            _userBehaviorTracker = behaviorTracker;
         }
 
         public ActionResult CompanyResults(string company)
@@ -39,9 +44,8 @@ namespace ServiceRecord
             {
                 return View("NoCompaniesFound");
             }
-
-
-            Task.Run(() => LogCompanySearch(company));
+            
+            _userBehaviorTracker.LogCompanySearch(company);
 
             return View(battles);
         }
@@ -51,20 +55,7 @@ namespace ServiceRecord
             return View(company);
         }
 
-        private void LogCompanySearch(string companyName) 
-        {
-            using (var db = _clashdbContext)
-            {
-                TCompanies companyRecord = db.TCompanies.Find(companyName);
-
-                if (companyRecord != null)
-                {
-                    //Not Thread safe, but losing a transaction here and there is unimportant.
-                    companyRecord.TimesSearched++;
-                    db.SaveChanges();
-                }
-            }
-        }
+       
 
     }
 }
