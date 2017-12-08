@@ -33,3 +33,9 @@
         display: none;
     }
 }
+
+.ui-autocomplete {
+    max-height: 400px;
+    overflow-y: auto; /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+}

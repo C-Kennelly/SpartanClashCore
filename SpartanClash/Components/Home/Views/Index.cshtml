@@ -1,20 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-
-
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
-
 <script>
-    
-        $(function () {
-            $("#srch-companies").autocomplete({
-                source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
-                position: { my: "left top", at: "left bottom", collision: "none" }
+    $(function () {
+        $("#srch-companies").autocomplete({
+            source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
+            position: { my: "left top", at: "left bottom", collision: "none" },
+            delay: 200
             });
-        });
+    });
 </script>
 
 <div class="jumbotron">
