@@ -1,5 +1,10 @@
 ﻿This file enumerates the environment variables needed to run SpartanClash.
 
+
+
+
+
+
 ##### Format ############
 ## All variables inside the application should use the following format:
 [APPLICATIONNAME]_[VARIABLENAME]
@@ -7,14 +12,24 @@
 ## For example, the application would reference:
 SPARTANCLASH_CLASHDBSTRING
 
-## And for CI purposes, all Secrets will use this format:
+
+
+
+
+##### Jeknins ############
+## For CI purposes, all Secrets will use this format:
 [APPLICATIONNAME]_[ENVIRONMENTNAME]_[VARIABLENAME]
 
-##  So the Jenkins ID for the above example would be:
+## So the Jenkins ID for the above example would be:
 SPARTANCLASH_DEV_CLASHDBSTRING
 SPARTANCLASH_TEST_CLASHDBSTRING
 SPARTANCLASH_PROD_CLASHDBSTRING
 
+## When storing in Jenkins, highly recommend including the double quote marks around the string
+## It significantly eases the docker run command on the remote server.
+Store as --> "server=******;userid=*******;password=******;database=*****"
+## Which makes the docker run command very straightfoward in the Jenkinsfile, as in the below snippet:
+  sh 'ssh... docker run -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING}...'
 ########################
 
 
