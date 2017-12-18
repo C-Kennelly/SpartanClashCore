@@ -2,15 +2,14 @@ pipeline {
   agent any
 
   environment {
+    SPARTANCLASH_CLASHDBSTRING = credentials('SPARTANCLASH_PROD_CLASHDBSTRING')
+
     applicationName = 'SpartanClash'
     applicatonDisplayName = 'Spartan Clash'
 
     containerNameSpace = 'ckennelly'
     containerName = 'spartanclash'
     dockerBuildFolder = 'SpartanClash'
-
-    environment {
-    SPARTANCLASH_CLASHDBSTRING = credentials('SPARTANCLASH_PROD_CLASHDBSTRING')
     
     jenkinsServiceAccount = 'jenkinssvc'
     acceptanceServerIP = '138.197.202.218'
