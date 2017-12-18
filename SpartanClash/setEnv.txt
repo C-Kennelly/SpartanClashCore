@@ -1,0 +1,47 @@
+﻿This file enumerates the environment variables needed to run SpartanClash.
+
+##### Format ############
+## All variables inside the application should use the following format:
+[APPLICATIONNAME]_[VARIABLENAME]
+
+## For example, the application would reference:
+SPARTANCLASH_CLASHDBSTRING
+
+## And for CI purposes, all Secrets will use this format:
+[APPLICATIONNAME]_[ENVIRONMENTNAME]_[VARIABLENAME]
+
+##  So the Jenkins ID for the above example would be:
+SPARTANCLASH_DEV_CLASHDBSTRING
+SPARTANCLASH_TEST_CLASHDBSTRING
+SPARTANCLASH_PROD_CLASHDBSTRING
+
+########################
+
+
+
+
+
+##### Docker ############
+## A reminder when using docker run to pass in environment variables with the '-e' flag, like so:
+
+docker run -e "SPARTANCLASH_CLASHDBSTRING=[Connection string to ClashDB]" -p 8080:80 ckennelly/spartanclash:latest
+
+## And don't forget, multiple environment variables require multiple '-e' flags:
+
+docker run -e "SPARTANCLASH_CLASHDBSTRING=[Connection string to ClashDB]" -e "SPARTANCLASH_CLASHCREDSDBSTRING=[Another connection string] -p 8080:80 ckennelly/spartanclash:latest
+
+## Finally, especially when using sensitive values (connection strings, passwords, etc)...
+## You can pull from the calling environment and avoid writing to logs by not providing an "=[secret]" after a name.
+## Just set the environment variable locally and then use the following syntax for 'docker run':
+
+docker run -e SPARTANCLASH_CLASHDBSTRING" -p 8080:80 ckennelly/spartanclash:latest
+
+########################
+
+
+
+
+
+##### Variables ############
+
+SPARTANCLASH_CLASHDBSTRING=[Connection string to the ClashDB, the primary application database.]

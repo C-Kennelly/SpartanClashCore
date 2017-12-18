@@ -13,6 +13,7 @@ using SpartanClash.Models.ClashDB;
 using Identity.Models;
 using Identity.EmailSender;
 using Microsoft.AspNetCore.Mvc.Razor;
+using System;
 
 namespace SpartanClash
 {
@@ -42,20 +43,20 @@ namespace SpartanClash
             });
 
             //Require HTTPS everywhere
-/****** HTTPS disabled while we deal with certs. *****************
+            /****** HTTPS disabled while we deal with certs. *****************
 
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
-*****************************************************************/
+                        services.Configure<MvcOptions>(options =>
+                        {
+                            options.Filters.Add(new RequireHttpsAttribute());
+                        });
+            *****************************************************************/
 
             //Make clash db available to the application
             services.AddDbContext<clashdbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("clashDBConnection")));
+                options.UseMySql(Environment.GetEnvironmentVariable("SPARTANCLASH_CLASHDBSTRING")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("clashDBCredsConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseMySql(Configuration.GetConnectionString("clashDBCredsConnection")));
 
             services.AddTransient<UserBehaviorTracking.UserBehaviorTracker>();
 /****** Authentication disabled while we deal with certs. *****************

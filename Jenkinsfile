@@ -8,6 +8,9 @@ pipeline {
     containerNameSpace = 'ckennelly'
     containerName = 'spartanclash'
     dockerBuildFolder = 'SpartanClash'
+
+    environment {
+    SPARTANCLASH_CLASHDBSTRING = credentials('SPARTANCLASH_PROD_CLASHDBSTRING')
     
     jenkinsServiceAccount = 'jenkinssvc'
     acceptanceServerIP = '138.197.202.218'
@@ -54,7 +57,7 @@ pipeline {
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
-        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
+        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -e SPARTANCLASH_CLASHDBSTRING -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
       post {
         failure {
