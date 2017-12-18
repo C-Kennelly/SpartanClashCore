@@ -40,8 +40,8 @@ pipeline {
         }
         stage('Clean Old') {
           steps {
-            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker stop ${applicationName}'
-            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker rm ${applicationName}'
+            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker stop ${applicationName} || echo "No container to stop"'
+            sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker rm ${applicationName} || echo "No container to remove"'
             //sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker rm $(docker ps -a -q -f status=exited)'
           }
         }
@@ -56,7 +56,7 @@ pipeline {
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
-        sh "ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING} -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}"
+        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING} -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
       post {
         failure {
