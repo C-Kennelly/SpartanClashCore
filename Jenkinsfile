@@ -56,7 +56,7 @@ pipeline {
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
-        sh "ssh ${jenkinsServiceAccount}@${acceptanceServerIP} export SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING}"
+        sh "ssh ${jenkinsServiceAccount}@${acceptanceServerIP} export SPARTANCLASH_CLASHDBSTRING='${SPARTANCLASH_CLASHDBSTRING}'"
         sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} echo $SPARTANCLASH_CLASHDBSTRING'
         sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -e SPARTANCLASH_CLASHDBSTRING -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
