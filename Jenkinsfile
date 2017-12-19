@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     SPARTANCLASH_CLASHDBSTRING = credentials('SPARTANCLASH_PROD_CLASHDBSTRING')
-    SPARCTANCLASH_SLACKWEBHOOKURL = credentials('SPARTANCLASH_PROD_SLACKWEBHOOKURL')
+    SPARTANCLASH_SLACKWEBHOOKURL = credentials('SPARTANCLASH_PROD_SLACKWEBHOOKURL')
 
     applicationName = 'SpartanClash'
     applicatonDisplayName = 'Spartan Clash'
