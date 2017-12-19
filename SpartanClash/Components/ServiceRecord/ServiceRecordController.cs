@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ using ServiceRecord.ViewModels;
 
 using SpartanClash.Models.ClashDB;
 using UserBehaviorTracking;
+using Notification;
 
 namespace ServiceRecord
 {
@@ -44,7 +46,7 @@ namespace ServiceRecord
 
             if (battles.Count < 1)
             {
-                return View("NoCompaniesFound");
+                return View("NoCompaniesFound", company);
             }   
 
             return View(battles);
@@ -54,8 +56,5 @@ namespace ServiceRecord
         {
             return View(company);
         }
-
-       
-
     }
 }
