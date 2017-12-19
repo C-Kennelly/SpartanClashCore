@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     SPARTANCLASH_CLASHDBSTRING = credentials('SPARTANCLASH_PROD_CLASHDBSTRING')
+    SPARCTANCLASH_SLACKWEBHOOKURL = credentials('SPARTANCLASH_PROD_SLACKWEBHOOKURL')
 
     applicationName = 'SpartanClash'
     applicatonDisplayName = 'Spartan Clash'
@@ -56,7 +57,11 @@ pipeline {
     stage('Start Application') {
       steps {
         slackSend (color: '#FFFF00', message: "Starting ${env.JOB_NAME} [${env.BUILD_NUMBER}]...")
-        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING} -d -p  80:80 --name ${applicationName} ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
+        sh 'ssh ${jenkinsServiceAccount}@${acceptanceServerIP} docker run \
+        -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING} \
+        -e SPARTANCLASH_SLACKWEBHOOKURL=${SPARTANCLASH_SLACKWEBHOOKURL} \
+        -d -p  80:80 --name ${applicationName} \
+        ${containerNameSpace}/${containerName}:${BUILD_NUMBER}'
       }
       post {
         failure {

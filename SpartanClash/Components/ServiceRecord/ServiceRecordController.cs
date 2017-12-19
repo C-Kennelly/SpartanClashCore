@@ -40,12 +40,12 @@ namespace ServiceRecord
                 battles.Add(new ClanBattle(company, match, _clashdbContext));
             }
 
+            _userBehaviorTracker.LogCompanySearch(company);
+
             if (battles.Count < 1)
             {
                 return View("NoCompaniesFound");
-            }
-            
-            _userBehaviorTracker.LogCompanySearch(company);
+            }   
 
             return View(battles);
         }

@@ -25,9 +25,9 @@ SPARTANCLASH_DEV_CLASHDBSTRING
 SPARTANCLASH_TEST_CLASHDBSTRING
 SPARTANCLASH_PROD_CLASHDBSTRING
 
-## When storing in Jenkins, highly recommend including the double quote marks around the string
+## When storing in Jenkins, highly recommend including the double quote marks around strings
 ## It significantly eases the docker run command on the remote server.
-Store as --> "server=******;userid=*******;password=******;database=*****"
+Store as --> "server=******;userid=*******;password=******;database=*****"  <-- (the double quotes are part of what we are storing)
 ## Which makes the docker run command very straightfoward in the Jenkinsfile, as in the below snippet:
   sh 'ssh... docker run -e SPARTANCLASH_CLASHDBSTRING=${SPARTANCLASH_CLASHDBSTRING}...'
 ########################
@@ -59,4 +59,6 @@ docker run -e SPARTANCLASH_CLASHDBSTRING" -p 8080:80 ckennelly/spartanclash:late
 
 ##### Variables ############
 
-SPARTANCLASH_CLASHDBSTRING=[Connection string to the ClashDB, the primary application database.]
+-> SPARTANCLASH_CLASHDBSTRING=[Connection string to the ClashDB, the primary application database.]
+
+-> SPARTANCLASH_SLACKWEBHOOKURL=[Webhook URL required to post messages to the Slack channel.]

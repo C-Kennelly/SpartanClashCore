@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SpartanClash.Models.ClashDB;
+using Notification;
 
 namespace UserBehaviorTracking
 {
@@ -30,6 +31,14 @@ namespace UserBehaviorTracking
                 //------------
 
                 _clashdbContext.SaveChanges();
+            }
+            else
+            {
+                string webhookString = Environment.GetEnvironmentVariable("SPARTANCLASH_SLACKWEBHOOKURL");
+                var webhookUrl = new Uri(webhookString);
+
+                var slackClient = new SlackClient(webhookUrl);
+                slackClient.SendMessageAsync("Failed search for '" + companyName + "'");
             }
 
         }
