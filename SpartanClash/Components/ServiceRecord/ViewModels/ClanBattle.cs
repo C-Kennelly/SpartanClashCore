@@ -54,6 +54,11 @@ namespace ServiceRecord.ViewModels
             return mapImageURL;
         }
 
+        public int GetTeam()
+        {
+            return team;
+        }
+
         private void DetermineTeam(TClashdevset match)
         {
             if (primaryCompany == match.Team1Company1 || primaryCompany == match.Team1Company2)

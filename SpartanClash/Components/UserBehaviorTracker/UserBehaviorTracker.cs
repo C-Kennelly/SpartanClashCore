@@ -38,7 +38,15 @@ namespace UserBehaviorTracking
                 var webhookUrl = new Uri(webhookString);
 
                 var slackClient = new SlackClient(webhookUrl);
-                slackClient.SendMessageAsync("Failed search for '" + companyName + "'").Wait();
+
+                try
+                {
+                    slackClient.SendMessageAsync("Failed search for '" + companyName + "'").Wait();
+                }
+                catch(Exception e)
+                {
+                    //TODO: What kind of errors do we experience?
+                }
             }
 
         }

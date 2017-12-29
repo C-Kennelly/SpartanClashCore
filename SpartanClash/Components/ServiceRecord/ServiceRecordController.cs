@@ -24,7 +24,7 @@ namespace ServiceRecord
             _userBehaviorTracker = behaviorTracker;
         }
 
-        public ActionResult CompanyResults(string company)
+        public ActionResult CompanyCards(string company)
         {
 
             List<TClashdevset> companyMatches = _clashdbContext.TClashdevset
