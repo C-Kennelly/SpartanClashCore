@@ -1,4 +1,9 @@
-﻿.game-result-summation {
+﻿.company-title-header {
+    text-align: center;
+    width: 400px;
+}
+
+.game-result-summation {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

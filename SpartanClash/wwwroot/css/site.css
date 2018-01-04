@@ -39,8 +39,3 @@
     overflow-y: auto; /* prevent horizontal scrollbar */
     overflow-x: hidden; /* add padding to account for vertical scrollbar */
 }
-
-.company-header {
-    text-align: center;
-    width: 400px;
-}
