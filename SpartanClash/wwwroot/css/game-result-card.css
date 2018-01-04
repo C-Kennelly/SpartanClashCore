@@ -3,6 +3,12 @@
     align-items: center;
 }
 
+.filter-group {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+}
+
 .company-title-header {
     text-align: center;
     width: 100%;

@@ -35,7 +35,12 @@
 
 <div class="company-title-header">
     <h1><b>@companyName</b></h1>
-    <h4>Showing matches since last refresh on @ViewData["LastRefreshDate"]</h4>
+    <h3>Last refresh: @ViewData["LastRefreshDate"]</h3>
+    <div class="filter-group">
+        <h5>Against all opponents</h5>
+        <h5>For all dates</h5>
+        <h5>For all modes</h5>
+    </div>
 </div>
 
 @if (Model.Count() == 1)

@@ -38,7 +38,6 @@ namespace ServiceRecord
                             || x.Team2Company1 == company
                             || x.Team2Company2 == company
                             )
-                    && x.MatchCompleteDate > lastRefreshDate
                 ).ToList();//.OrderBy(x => x.MatchCompleteDate).ThenBy(x => x.MapId).ToList();
 
             List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
