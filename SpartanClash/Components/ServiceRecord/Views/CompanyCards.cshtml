@@ -1,5 +1,6 @@
 ﻿@using ServiceRecord.ViewModels;
-@model List<ClanBattle>
+@using System.Globalization;
+@model IOrderedEnumerable<ClanBattle>
 
 <link rel="stylesheet" href="~/css/game-result-card.css" />
 
@@ -32,20 +33,42 @@
     string companyName = Model.FirstOrDefault().primaryCompany;
 }
 
-<h1><u>@companyName</u></h1>
+<div class="company-header">
+    <h1><b>@companyName</b></h1>
+</div>
 
-@if (Model.Count == 1)
+@if (Model.Count() == 1)
 {
-    <h4>@companyName has only 1 Warlords match on record:</h4>
+    <h4>@companyName has only 1 match on record:</h4>
 }
 else
 {
+    double winCount = Model.Where(x => x.isWin == true).Count();
+    double lossCount = Model.Count() - winCount;
+
+    string winRatio;
+    if (lossCount < 1)
+    {
+        winRatio = "--";
+    }
+    else
+    {
+        double ratioCalc = winCount / lossCount;
+        //NumberFormatInfo nfi = new NumberFormatInfo();
+        //nfi.NumberDecimalDigits = 2;
+        winRatio = ratioCalc.ToString("0.00");
+    }
+
     <div class="game-result-summation">
-        <h4>Wins: </h4>
-        <h4>Losses: </h4>
-        <h4>Ratio: </h4>
+        <h4>Wins:</h4>
+        <h4><b><u>@winCount</u></b></h4>
+        <h4>Losses:</h4>
+        <h4><b><u>@lossCount</u></b></h4>
+        <h4>Ratio:</h4>
+        <h4><b><u>@winRatio</u></b></h4>
     </div>
 
+    <!--
     <div class="game-result-controls">
         <div>
             Filter by:
@@ -59,10 +82,9 @@ else
         <div class="input-group-btn filter-button">
             <button class="btn btn-default" type="submit">Since</button>
         </div>
-
-
     </div>
-}
+    -->
+        }
 
 @foreach (ClanBattle battle in Model)
 {

@@ -19,6 +19,9 @@ namespace ServiceRecord.ViewModels
         public string mapName { get; set; }
         public DateTime matchDate { get; set; }
 
+        public bool isWin { get; set; }
+        public bool isClanBattle { get; set; }
+
         private string mapImageURL { get; set; }
 
         private int team { get; set; }
@@ -47,6 +50,29 @@ namespace ServiceRecord.ViewModels
             TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
             mapName = metadataRecord.PrintableName;
             mapImageURL = metadataRecord.ImageUrl;
+
+            SetSortingFlags();
+        }
+
+        private void SetSortingFlags()
+        {
+            if (score > enemyScore)
+            {
+                isWin = true;
+            }
+            else
+            {
+                isWin = false;
+            }
+
+            if (enemyHeader == printableMissingCompanyValue)
+            {
+                isClanBattle = false;
+            }
+            else
+            {
+                isClanBattle = true;
+            }
         }
 
         public string GetMapImageURL()

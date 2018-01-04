@@ -7,6 +7,7 @@ namespace SpartanClash.Models.ClashDB
     public partial class clashdbContext : DbContext
     {
         public virtual DbSet<TClashdevset> TClashdevset { get; set; }
+        public virtual DbSet<TClashmetadata> TClashmetadata { get; set; }
         public virtual DbSet<TCompanies> TCompanies { get; set; }
         public virtual DbSet<TCompany2matches> TCompany2matches { get; set; }
         public virtual DbSet<TMapmetadata> TMapmetadata { get; set; }
@@ -20,6 +21,7 @@ namespace SpartanClash.Models.ClashDB
         {
             if (!optionsBuilder.IsConfigured)
             {
+
             }
         }
 
@@ -122,6 +124,19 @@ namespace SpartanClash.Models.ClashDB
                     .HasDefaultValueSql("'-1'");
 
                 entity.Property(e => e.Team2Score).HasColumnName("Team2_Score");
+            });
+
+            modelBuilder.Entity<TClashmetadata>(entity =>
+            {
+                entity.ToTable("t_clashmetadata");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.DataRefreshDate)
+                    .HasColumnName("dataRefreshDate")
+                    .HasColumnType("datetime");
             });
 
             modelBuilder.Entity<TCompanies>(entity =>
