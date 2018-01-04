@@ -3,10 +3,19 @@
     align-items: center;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.filter-item {
+    width: 33%;
+    background-color: #333333;
+}
+
 .filter-group {
     display: flex;
     justify-content: space-between;
-    width: 95%;
+    width: 100%;
 }
 
 .company-title-header {
