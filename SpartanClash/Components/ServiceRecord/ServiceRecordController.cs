@@ -29,6 +29,8 @@ namespace ServiceRecord
             //TODO - set this per company or user session?
             DateTime lastRefreshDate = GetLastRefreshDate();
 
+            ViewData["LastRefreshDate"] = lastRefreshDate.ToShortDateString();
+
             List<TClashdevset> companyMatches = _clashdbContext.TClashdevset
                 .Where(
                     x => (x.Team1Company1 == company

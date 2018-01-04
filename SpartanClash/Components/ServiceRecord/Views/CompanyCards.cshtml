@@ -26,7 +26,7 @@
 
 @{
 
-    ViewData["Title"] = "CompanyResults";
+    ViewData["Title"] = "Company Results";
 
     Layout = "~/Components/_SharedViews/_Layout.cshtml";
 
@@ -35,6 +35,7 @@
 
 <div class="company-title-header">
     <h1><b>@companyName</b></h1>
+    <h4>Showing matches since last refresh on @ViewData["LastRefreshDate"]</h4>
 </div>
 
 @if (Model.Count() == 1)
