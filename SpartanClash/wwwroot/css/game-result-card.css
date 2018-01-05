@@ -60,6 +60,7 @@
     text-align: center;
     height: 110px;
     width: 40%;
+    border: 0;
 }
 
 .team-result h2 {
@@ -85,14 +86,14 @@
 
 .game-result-spacer-red-active {
     width: 0;
-    height: 0;
+    height: 110px;
     border-bottom: 110px solid darkslateblue;
     border-left: 110px solid firebrick;
 }
 
 .game-result-spacer-blue-active {
     width: 0;
-    height: 0;
+    height: 110px;
     border-bottom: 110px solid firebrick;
     border-left: 110px solid darkslateblue;
 }
