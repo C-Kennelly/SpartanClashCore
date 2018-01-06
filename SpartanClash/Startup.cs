@@ -104,7 +104,6 @@ namespace SpartanClash
 
             app.UseStaticFiles();
 
-
 /****** Authentication disabled while we deal with certs. *****************
 
             app.UseAuthentication();

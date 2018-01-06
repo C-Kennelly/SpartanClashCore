@@ -7,19 +7,6 @@
     visibility: hidden;
 }
 
-.filter-item {
-    width: 33%;
-    background-color: #333333;
-    vertical-align: central;
-    text-align: center;
-}
-
-.filter-group {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
 .company-title-header {
     text-align: center;
     width: 100%;
@@ -102,3 +89,61 @@
     color: #ffffff;
     text-decoration: underline;
 }
+
+/* Dropdown Button */
+
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.filter-item {
+    width: 33%;
+    background-color: #333333;
+    vertical-align: central;
+    text-align: center;
+    border: none;
+}
+
+.filter-btn {
+    background-color: #333333;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Dropdown button on hover & focus */
+.fitler-btn:hover, .filter-btn:focus {
+    background-color: #444444;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #eeeeee;
+    width: inherit;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content p:hover {
+    background-color: #999999
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+} 

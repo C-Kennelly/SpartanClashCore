@@ -3,26 +3,7 @@
 @model IOrderedEnumerable<ClanBattle>
 
 <link rel="stylesheet" href="~/css/game-result-card.css" />
-
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script>
-    $(function () {
-        var opponents = [
-            "Adamant",
-            "Dominated",
-            "[randoms]"
-        ];
-    }  );
-
-    $(function () {
-        $("#filter-results-opponents").autocomplete({
-            source: opponents,
-            position: { my: "left top", at: "left bottom", collision: "none" },
-            delay: 0
-            });
-    });
-</script>
-
+<script src="~/js/game-result-card.js"></script>
 
 @{
 
@@ -31,20 +12,43 @@
     Layout = "~/Components/_SharedViews/_Layout.cshtml";
 
     string companyName = Model.FirstOrDefault().primaryCompany;
+
 }
 
 <div class="company-title-header">
     <h1><b>@companyName</b></h1>
     <h3>Last refresh: @ViewData["LastRefreshDate"]</h3>
-    <div class="filter-group">
-        <div class="filter-item filter-opponent">
-            <h5>Against everyone</h5>
+
+    <div class="filter-controls">
+        <div class="filter-item">
+            <button onclick="showDropdownContent('opponent-dropdown')" id="opponent-filter-btn" class="filter-btn">
+                <h5>Against everyone</h5>
+            </button>
+            <div id="opponent-dropdown" class="dropdown-content">
+                <p>Against everyone</p>
+                <p>Clans only</p>
+            </div>
         </div>
-        <div class="filter-item filter-date">
-            <h5>Since launch day</h5>
+        
+        <div class="filter-item">
+            <button onclick="showDropdownContent('date-dropdown')" id="date-filter-btn" class="filter-btn">
+                <h5>Since launch day</h5>
+            </button>
+            <div id="date-dropdown" class="dropdown-content">
+                <p>Since launch day</p>
+                <p>Since last refresh</p>
+            </div>
         </div>
-        <div class="filter-item filter-mode">
-            <h5>For all modes</h5>
+
+        <div class="filter-item">
+            <button onclick="showDropdownContent('mode-dropdown')" id="mode-filter-btn" class="filter-btn">
+                <h5>For all modes</h5>
+            </button>
+            <div id="mode-dropdown" class="dropdown-content">
+                <p>For all modes</p>
+                <p>Arena only</p>
+                <p>Warzone only</p>
+            </div>
         </div>
     </div>
 </div>
@@ -66,8 +70,6 @@ else
     else
     {
         double ratioCalc = winCount / lossCount;
-        //NumberFormatInfo nfi = new NumberFormatInfo();
-        //nfi.NumberDecimalDigits = 2;
         winRatio = ratioCalc.ToString("0.00");
     }
 
@@ -80,23 +82,7 @@ else
         <h4><b><u>@winRatio</u></b></h4>
     </div>
 
-    <!--
-    <div class="game-result-controls">
-        <div>
-            Filter by:
-        </div>
-        <div class="input-group-btn ui-widget filter-button">
-            <button class="btn btn-default" id="filter-results-opponents" type="submit">Opponent</button>
-        </div>
-        <div class="input-group-btn filter-button">
-            <button class="btn btn-default" type="submit">Game Type</button>
-        </div>
-        <div class="input-group-btn filter-button">
-            <button class="btn btn-default" type="submit">Since</button>
-        </div>
-    </div>
-    -->
-        }
+}
 
 @foreach (ClanBattle battle in Model)
 {
