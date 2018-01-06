@@ -38,18 +38,22 @@ namespace UserBehaviorTracking
             }
             else
             {
-                string webhookString = Environment.GetEnvironmentVariable("SPARTANCLASH_SLACKWEBHOOKURL");
-                var webhookUrl = new Uri(webhookString);
-
-                var slackClient = new SlackClient(webhookUrl);
-
                 try
                 {
+                    string webhookString = Environment.GetEnvironmentVariable("SPARTANCLASH_SLACKWEBHOOKURL");
+                    var webhookUrl = new Uri(webhookString);
+
+                    var slackClient = new SlackClient(webhookUrl);
+
+               
                     slackClient.SendMessageAsync("Failed search for '" + companyName + "'").Wait();
                 }
                 catch(Exception e)
                 {
                     //TODO: What kind of errors do we experience?
+                    //So far...
+                    //  -> Bad environment variable formatting
+                    //  -> No response from slack channel
                 }
             }
 

@@ -1,5 +1,7 @@
 ﻿This file enumerates the environment variables needed to run SpartanClash.
 
+(Scroll to bottom (Variables section) to find the final list.  
+Everything in between is instructions/conventions for creating new variables.
 
 
 
