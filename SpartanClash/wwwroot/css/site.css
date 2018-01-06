@@ -39,3 +39,7 @@
     overflow-y: auto; /* prevent horizontal scrollbar */
     overflow-x: hidden; /* add padding to account for vertical scrollbar */
 }
+
+.front-page-jumbotron {
+    min-width: 400px;
+}
