@@ -18,8 +18,12 @@ namespace UserBehaviorTracking
 
         public void LogCompanySearch(string companyName)
         {
+            TCompanies companyRecord = null;
 
-            TCompanies companyRecord = _clashdbContext.TCompanies.Find(companyName);
+            if (companyName != null && companyName != "")
+            {
+                companyRecord = _clashdbContext.TCompanies.Find(companyName);
+            }
 
             if (companyRecord != null)
             {

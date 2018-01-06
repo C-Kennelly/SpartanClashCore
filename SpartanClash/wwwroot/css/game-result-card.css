@@ -97,3 +97,8 @@
     border-bottom: 110px solid firebrick;
     border-left: 110px solid darkslateblue;
 }
+
+.enemy-header-link a{
+    color: #ffffff;
+    text-decoration: underline;
+}
