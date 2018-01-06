@@ -40,6 +40,6 @@
     overflow-x: hidden; /* add padding to account for vertical scrollbar */
 }
 
-.front-page-jumbotron {
-    min-width: 400px;
+.front-page-jumbotron h2 {
+    font-size: 20pt;
 }
