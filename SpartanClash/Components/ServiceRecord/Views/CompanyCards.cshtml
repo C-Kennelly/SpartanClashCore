@@ -25,8 +25,9 @@
                 <h5>Against everyone</h5>
             </button>
             <div id="opponent-dropdown" class="dropdown-content">
-                <p>Against everyone</p>
-                <p>Clans only</p>
+                <p onclick="showAllOpponentsUsing('opponent-hidden', (this.textContent))">Against everyone</p>
+                <p onclick="showOnlyClanOpponentsUsing('opponent-hidden', (this.textContent))">Clans only</p>
+                <p onclick="showOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
             </div>
         </div>
         
@@ -84,42 +85,44 @@ else
 
 }
 
-@foreach (ClanBattle battle in Model)
-{
-
-    @if (battle.GetTeam() == 1)
+<div class="results-cards">
+    @foreach (ClanBattle battle in Model)
     {
-        <div class="game-result-card" id="accordion">
-            <div class="team-result team-result-ally team-result-red">
-                <h2>@battle.score</h2>
-                <h3>@battle.primaryCompany</h3>
+    
+        @if (battle.GetTeam() == 1)
+        {
+            <div class="game-result-card">
+                <div class="team-result team-result-ally team-result-red">
+                    <h2>@battle.score</h2>
+                    <h3>@battle.primaryCompany</h3>
+                </div>
+                <div class="game-result-spacer-red-active"></div>
+                <div class="team-result team-result-enemy team-result-blue">
+                    <h2>@battle.enemyScore</h2>
+                    @if (battle.isClanBattle)
+                    {   <h3 class="enemy-clan-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
+                    else
+                    {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
+                </div>
             </div>
-            <div class="game-result-spacer-red-active"></div>
-            <div class="team-result team-result-enemy team-result-blue">
-                <h2>@battle.enemyScore</h2>
-                @if (battle.isClanBattle)
-                {   <h3 class="enemy-header-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
-                else
-                {   <h3 >@battle.enemyHeader</h3> }
+        }
+        else
+        {
+            <div class="game-result-card">
+                <div class="team-result team-result-ally team-result-blue">
+                    <h2>@battle.score</h2>
+                    <h3>@battle.primaryCompany</h3>
+                </div>
+                <div class="game-result-spacer-blue-active"></div>
+                <div class="team-result team-result-enemy team-result-red">
+                    <h2>@battle.enemyScore</h2>
+                    @if (battle.isClanBattle)
+                    {   <h3 class="enemy-clan-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
+                    else
+                    {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
+                </div>
             </div>
-        </div>
+        }
+    
     }
-    else
-    {
-        <div class="game-result-card" id="accordion">
-            <div class="team-result team-result-ally team-result-blue">
-                <h2>@battle.score</h2>
-                <h3>@battle.primaryCompany</h3>
-            </div>
-            <div class="game-result-spacer-blue-active"></div>
-            <div class="team-result team-result-enemy team-result-red">
-                <h2>@battle.enemyScore</h2>
-                @if (battle.isClanBattle)
-                {   <h3 class="enemy-header-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
-                else
-                {   <h3>@battle.enemyHeader</h3> }
-            </div>
-        </div>
-    }
-
-}
+</div>
