@@ -108,7 +108,7 @@ function MatchIsWin(gameResultCard) {
 
 
 
-    /*  Common - Say  ******/
+    /*  Common - Display  ******/
     function ChangeElementText(element, newText) {
         element.textContent = newText;
     }
@@ -132,16 +132,16 @@ function MatchIsClanBattle(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-isClanBattle");
 }
 
-
-
 function showAllOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
+    showCardsWithCSSFilter(allMatches, cssFilterClass);
 
-    var clanMatches = GetClanMatches(allMatches);
-    var nonClanMatches = GetNonClanMatches(allMatches);
+    //var clanMatches = GetClanMatches(allMatches);
+    //var nonClanMatches = GetNonClanMatches(allMatches);
 
-    showCardsWithCSSFilter(clanMatches, cssFilterClass);
-    showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
+    //showCardsWithCSSFilter(clanMatches, cssFilterClass);
+    //showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
+
 
     OpponentCleanup(textContent);
 }
@@ -207,6 +207,78 @@ function showOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
 function GetMatchDate(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-matchDate");
 }
+
+function showAllDatesUsing(cssFilterClass, textContent) {
+
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+
+    var matchesToShow = GetAllMatchesAfterDate(allMatches, new Date(2015, 9, 26));
+
+    showCardsWithCSSFilter(matchesToShow, cssFilterClass);
+
+    DateCleanup(textContent);
+}
+
+function showOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var thirtyDayDate = MakeDateXDaysInPast(30);
+
+    var matchesToShow = GetAllMatchesAfterDate(allMatches, thirtyDayDate);
+    var matchesToHide = GetAllMatchesBeforeDate(allMatches, thirtyDayDate);
+
+    showCardsWithCSSFilter(matchesToShow, cssFilterClass);
+    hideCardsWithCSSFilter(matchesToHide, cssFilterClass);
+
+    DateCleanup(textContent);
+}
+
+        function MakeDateXDaysInPast(daysInPast) {
+            var today = new Date()
+            var priorDate = new Date().setDate(today.getDate() - daysInPast);
+        
+            return new Date(priorDate);
+        }
+
+    function DateCleanup(textToReplace) {
+        var dateButton = document.getElementById("date-filter-btn");
+        ChangeElementText(dateButton, textToReplace);
+    
+        RecalculateAggregateStats();
+    }
+    
+    
+    function GetAllMatchesAfterDate(gameResultCardsToSearch, chosenDate) {
+        
+        var matchesAfteChosenDate = [];
+    
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            var matchDate = new Date(GetMatchDate(gameResultCardsToSearch[i]));
+    
+            if (matchDate.getTime() > chosenDate.getTime()) {
+                matchesAfteChosenDate.push(gameResultCardsToSearch[i]);
+            }
+        }
+
+        return matchesAfteChosenDate;
+    }
+
+    function GetAllMatchesBeforeDate(gameResultCardsToSearch, chosenDate) {
+
+        var matchesBeforeChosenDate = [];
+
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            var matchDate = new Date(GetMatchDate(gameResultCardsToSearch[i]));
+
+            if (matchDate.getTime() <= chosenDate.getTime()) {
+                matchesBeforeChosenDate.push(gameResultCardsToSearch[i]);
+            }
+        }
+
+        return matchesBeforeChosenDate;
+    }
+
 
 
 /*  Filtering - Mode  *******/

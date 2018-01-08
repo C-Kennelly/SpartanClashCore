@@ -36,8 +36,8 @@
                 <h5>Since launch day</h5>
             </button>
             <div id="date-dropdown" class="dropdown-content">
-                <p>Since launch day</p>
-                <p>Since last refresh</p>
+                <p onclick="showAllDatesUsing('date-hidden', (this.textContent))">Since launch day</p>
+                <p onclick="showOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">For last 30 days</p>
             </div>
         </div>
 
