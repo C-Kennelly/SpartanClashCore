@@ -13,16 +13,12 @@ namespace ServiceRecord.ViewModels
         public string allyHeader;
         public string enemyHeader;
 
-        public string result { get; set; }
         public int score { get; set; }
         public int enemyScore { get; set; }
-        public string mapName { get; set; }
         public DateTime matchDate { get; set; }
 
         public bool isWin { get; set; }
         public bool isClanBattle { get; set; }
-
-        private string mapImageURL { get; set; }
 
         private int team { get; set; }
         private string allyCompany { get; set; }
@@ -41,15 +37,14 @@ namespace ServiceRecord.ViewModels
             _clashdbContext = context;
 
             primaryCompany = companyName;
+
             DetermineTeam(match);
             DetermineTeamSpecificComponents(match);
+
             SetHeader(out allyHeader, primaryCompany, allyCompany);
             SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
-            matchDate = (DateTime)match.MatchCompleteDate;
 
-            TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
-            mapName = metadataRecord.PrintableName;
-            mapImageURL = metadataRecord.ImageUrl;
+            matchDate = (DateTime)match.MatchCompleteDate;
 
             SetSortingFlags();
         }
@@ -75,11 +70,6 @@ namespace ServiceRecord.ViewModels
             }
         }
 
-        public string GetMapImageURL()
-        {
-            return mapImageURL;
-        }
-
         public int GetTeam()
         {
             return team;
@@ -96,7 +86,6 @@ namespace ServiceRecord.ViewModels
         {
             if (team == 1) //Company is on team 1
             {
-                if (match.Team1Rank == 1) { result = "Win"; } else { result = "Loss"; }
                 score = (int)match.Team1Score;
                 enemyScore = (int)match.Team2Score;
                 enemyCompany1 = match.Team2Company1;
@@ -113,8 +102,6 @@ namespace ServiceRecord.ViewModels
             }
             else //Company is on team 2.
             {
-
-                if (match.Team2Rank == 1) { result = "Win"; } else { result = "Loss"; }
                 score = (int)match.Team2Score;
                 enemyScore = (int)match.Team1Score;
 

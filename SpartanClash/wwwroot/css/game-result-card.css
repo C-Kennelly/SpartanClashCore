@@ -94,13 +94,13 @@
     border-left: 110px solid darkslateblue;
 }
 
+.match-filter-data {
+    display: none;
+}
+
 .enemy-clan-link a{
     color: #ffffff;
     text-decoration: underline;
-}
-
-.non-clan-header {
-    /* No different styling, but is used for filter buttons. */
 }
 
 /* Dropdown Button */

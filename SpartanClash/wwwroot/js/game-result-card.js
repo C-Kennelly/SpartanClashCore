@@ -17,13 +17,42 @@ window.onclick = function (event) {
             }
         }
     }
-}
+};
 
-/******  Filtering - Common  ******/
+/*  Filtering - Common  ******/
 
 function RecalculateAggregateStats() {
+    var winCountElement = document.getElementById("winCount");
+    var lossCountElement = document.getElementById("lossCount");
+    var winRatioElement = document.getElementById("winRatio");
 
+
+    var allCards = document.getElementsByClassName("game-result-card");
+    //TODO Filter Cards to only visible elements;
+
+    var winCounter = 0;
+    var lossCounter = 0;
+    var winRatioCalculated = "X.XX";
+
+    for (var i = 0; i < allCards.length; i++){
+
+        if (MatchIsWin(allCards[i]) === "True")
+        {
+            winCounter++;
+        }
+        else {
+            lossCounter++;
+        }
+    }
+
+    ChangeElementText(winCountElement, "TODO");
+    ChangeElementText(lossCountElement, "TODO");
+    ChangeElementText(winRatioElement, "TODO");
 }
+
+            function MatchIsWin(gameResultCard) {
+                return GetDataValueFromMatchData(gameResultCard, "filter-isWin");
+            }
 
 function showCardsWithCSSFilter(cardsToShow, cssFilterClass) {
     for (var i = 0; i < cardsToShow.length; i++) {
@@ -37,17 +66,45 @@ function hideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
     }
 }
 
-function ChangeButtonTextByID(button, newText) {
+function ChangeElementText(button, newText) {
     button.textContent = newText;
 }
 
 
-/******  Filtering - Opponent  ******/
+function GetDataValueFromMatchData(gameResultCard, dataElementToSearch)
+{
+    var matchData = GetMatchDataFromCard(gameResultCard);
+    var dataElement = GetDataElementFromMatchData(matchData, dataElementToSearch);
+
+    return dataElement.textContent;
+}
+
+        function GetMatchDataFromCard(gameResultCard) {
+            var matchData = gameResultCard.getElementsByClassName("match-filter-data")[0];
+            return matchData;
+        }
+        
+        function GetDataElementFromMatchData(matchData, dataElementToSearch) {
+            var dataElement = matchData.getElementsByClassName(dataElementToSearch)[0];
+            return dataElement;
+        }
+
+
+
+
+
+/*  Filtering - Opponent  ******/
+function MatchIsClanBattle(gameResultCard) {
+    return GetDataValueFromMatchData(gameResultCard, "filter-isClanBattle");
+}
+
 
 
 function showAllOpponentsUsing(cssFilterClass, textContent) {
-    var clanMatches = GetClanMatches();
-    var nonClanMatches = GetNonClanMatches();
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var clanMatches = GetClanMatches(allMatches);
+    var nonClanMatches = GetNonClanMatches(allMatches);
 
     showCardsWithCSSFilter(clanMatches, cssFilterClass);
     showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
@@ -56,8 +113,10 @@ function showAllOpponentsUsing(cssFilterClass, textContent) {
 }
 
 function showOnlyClanOpponentsUsing(cssFilterClass, textContent) {
-    var clanMatches = GetClanMatches();
-    var nonClanMatches = GetNonClanMatches();
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var clanMatches = GetClanMatches(allMatches);
+    var nonClanMatches = GetNonClanMatches(allMatches);
 
     showCardsWithCSSFilter(clanMatches, cssFilterClass);
     hideCardsWithCSSFilter(nonClanMatches, cssFilterClass);
@@ -66,8 +125,10 @@ function showOnlyClanOpponentsUsing(cssFilterClass, textContent) {
 }
 
 function showOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
-    var clanMatches = GetClanMatches();
-    var nonClanMatches = GetNonClanMatches();
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var clanMatches = GetClanMatches(allMatches);
+    var nonClanMatches = GetNonClanMatches(allMatches);
 
     showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
     hideCardsWithCSSFilter(clanMatches, cssFilterClass);
@@ -77,35 +138,44 @@ function showOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
 
     function OpponentCleanup(textToReplace) {
         var opponentButton = document.getElementById("opponent-filter-btn");
-        ChangeButtonTextByID(opponentButton, textToReplace);
+        ChangeElementText(opponentButton, textToReplace);
     
         RecalculateAggregateStats();
     }
        
 
-    function GetClanMatches() {
-        var clanMatchHeaderElements = document.getElementsByClassName('enemy-clan-link');
-        return GetParentGameResultCards(clanMatchHeaderElements);
-    }
-    
-    function GetNonClanMatches() {
-        var nonClanHeaderElements = document.getElementsByClassName('non-clan-header');
-        return GetParentGameResultCards(nonClanHeaderElements);
-    }
-    
-        function GetParentGameResultCards(childNodeList) {
-        
-            var matchingGameResultCards = [childNodeList.length];
-        
-            for (var i = 0; i < childNodeList.length; i++) {
-                matchingGameResultCards[i] = childNodeList[i].parentElement.parentElement;
+    function GetClanMatches(gameResultCardsToSearch) {
+        var clanMatches = [];
+
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            if ( MatchIsClanBattle(gameResultCardsToSearch[i]) === "True" ) {
+                clanMatches.push(gameResultCardsToSearch[i]);
             }
-        
-            return matchingGameResultCards;
         }
 
-/******  Filtering - Date  ******/
+        return clanMatches;
+    }
+    
+    function GetNonClanMatches(gameResultCardsToSearch) {
+        var nonClanMatches = [];
+
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            if (MatchIsClanBattle(gameResultCardsToSearch[i]) === "False" ) {
+                nonClanMatches.push(gameResultCardsToSearch[i]);
+            }
+        }
+
+        return nonClanMatches;
+    }
 
 
+/*  Filtering - Date  ******/
+function GetMatchDate(gameResultCard) {
+    return GetDataValueFromMatchData(gameResultCard, "filter-matchDate");
+}
 
-/******  Filtering - Mode  ******/
+
+/*  Filtering - Mode  *******/
+function GetMatchDate(gameResultCard) {
+    return GetDataValueFromMatchData(gameResultCard, "filter-matchDate");
+}
