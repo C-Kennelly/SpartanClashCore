@@ -25,9 +25,9 @@
                 <h5>Against everyone</h5>
             </button>
             <div id="opponent-dropdown" class="dropdown-content">
-                <p onclick="showAllOpponentsUsing('opponent-hidden', (this.textContent))">Against everyone</p>
-                <p onclick="showOnlyClanOpponentsUsing('opponent-hidden', (this.textContent))">Clans only</p>
-                <p onclick="showOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
+                <p onclick="ShowAllOpponentsUsing('opponent-hidden', (this.textContent))">Against everyone</p>
+                <p onclick="ShowOnlyClanOpponentsUsing('opponent-hidden', (this.textContent))">Clans only</p>
+                <p onclick="ShowOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
             </div>
         </div>
         
@@ -36,8 +36,8 @@
                 <h5>Since launch day</h5>
             </button>
             <div id="date-dropdown" class="dropdown-content">
-                <p onclick="showAllDatesUsing('date-hidden', (this.textContent))">Since launch day</p>
-                <p onclick="showOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">For last 30 days</p>
+                <p onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since launch day</p>
+                <p onclick="ShowOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">For last 30 days</p>
             </div>
         </div>
 
@@ -46,9 +46,9 @@
                 <h5>For all modes</h5>
             </button>
             <div id="mode-dropdown" class="dropdown-content">
-                <p>For all modes</p>
-                <p>Arena only</p>
-                <p>Warzone only</p>
+                <p onclick="ShowAllModesUsing('mode-hidden', (this.textContent))">For all modes</p>
+                <p onclick="ShowOnlyArenaModesUsing('mode-hidden', (this.textContent))">Arena only</p>
+                <p onclick="ShowOnlyWarzoneModesUsing('mode-hidden', (this.textContent))">Warzone only</p>
             </div>
         </div>
     </div>
@@ -105,9 +105,10 @@ else
                     {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
                 </div>
                 <div class="match-filter-data">
-                    <p class="filter-isClanBattle">@battle.isClanBattle</p>
                     <p class="filter-isWin">@battle.isWin</p>
+                    <p class="filter-isClanBattle">@battle.isClanBattle</p>
                     <p class="filter-matchDate">@battle.matchDate</p>
+                    <p class="filter-gameMode">@battle.gameMode</p>
                 </div>
             </div>
         }
@@ -127,9 +128,10 @@ else
                     {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
                 </div>
                 <div class="match-filter-data">
-                    <p class="filter-isClanBattle">@battle.isClanBattle</p>
                     <p class="filter-isWin">@battle.isWin</p>
+                    <p class="filter-isClanBattle">@battle.isClanBattle</p>
                     <p class="filter-matchDate">@battle.matchDate</p>
+                    <p class="filter-gameMode">@battle.gameMode</p>
                 </div>
             </div>
         }

@@ -113,13 +113,13 @@ function MatchIsWin(gameResultCard) {
         element.textContent = newText;
     }
     
-    function showCardsWithCSSFilter(cardsToShow, cssFilterClass) {
+    function ShowCardsWithCSSFilter(cardsToShow, cssFilterClass) {
         for (var i = 0; i < cardsToShow.length; i++) {
             cardsToShow[i].classList.remove(cssFilterClass);
         }
     }
     
-    function hideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
+    function HideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
         for (var i = 0; i < cardsToHide.length; i++) {
             cardsToHide[i].classList.add(cssFilterClass);
         }
@@ -132,9 +132,9 @@ function MatchIsClanBattle(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-isClanBattle");
 }
 
-function showAllOpponentsUsing(cssFilterClass, textContent) {
+function ShowAllOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
-    showCardsWithCSSFilter(allMatches, cssFilterClass);
+    ShowCardsWithCSSFilter(allMatches, cssFilterClass);
 
     //var clanMatches = GetClanMatches(allMatches);
     //var nonClanMatches = GetNonClanMatches(allMatches);
@@ -146,26 +146,26 @@ function showAllOpponentsUsing(cssFilterClass, textContent) {
     OpponentCleanup(textContent);
 }
 
-function showOnlyClanOpponentsUsing(cssFilterClass, textContent) {
+function ShowOnlyClanOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
 
     var clanMatches = GetClanMatches(allMatches);
     var nonClanMatches = GetNonClanMatches(allMatches);
 
-    showCardsWithCSSFilter(clanMatches, cssFilterClass);
-    hideCardsWithCSSFilter(nonClanMatches, cssFilterClass);
+    ShowCardsWithCSSFilter(clanMatches, cssFilterClass);
+    HideCardsWithCSSFilter(nonClanMatches, cssFilterClass);
 
     OpponentCleanup(textContent);
 }
 
-function showOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
+function ShowOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
 
     var clanMatches = GetClanMatches(allMatches);
     var nonClanMatches = GetNonClanMatches(allMatches);
 
-    showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
-    hideCardsWithCSSFilter(clanMatches, cssFilterClass);
+    ShowCardsWithCSSFilter(nonClanMatches, cssFilterClass);
+    HideCardsWithCSSFilter(clanMatches, cssFilterClass);
 
     OpponentCleanup(textContent);
 }
@@ -208,19 +208,19 @@ function GetMatchDate(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-matchDate");
 }
 
-function showAllDatesUsing(cssFilterClass, textContent) {
+function ShowAllDatesUsing(cssFilterClass, textContent) {
 
     var allMatches = document.getElementsByClassName("game-result-card");
 
 
     var matchesToShow = GetAllMatchesAfterDate(allMatches, new Date(2015, 9, 26));
 
-    showCardsWithCSSFilter(matchesToShow, cssFilterClass);
+    ShowCardsWithCSSFilter(matchesToShow, cssFilterClass);
 
     DateCleanup(textContent);
 }
 
-function showOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
+function ShowOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
 
     var thirtyDayDate = MakeDateXDaysInPast(30);
@@ -228,8 +228,8 @@ function showOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
     var matchesToShow = GetAllMatchesAfterDate(allMatches, thirtyDayDate);
     var matchesToHide = GetAllMatchesBeforeDate(allMatches, thirtyDayDate);
 
-    showCardsWithCSSFilter(matchesToShow, cssFilterClass);
-    hideCardsWithCSSFilter(matchesToHide, cssFilterClass);
+    ShowCardsWithCSSFilter(matchesToShow, cssFilterClass);
+    HideCardsWithCSSFilter(matchesToHide, cssFilterClass);
 
     DateCleanup(textContent);
 }
@@ -282,6 +282,71 @@ function showOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
 
 
 /*  Filtering - Mode  *******/
-function GetMatchDate(gameResultCard) {
-    return GetDataValueFromMatchData(gameResultCard, "filter-matchDate");
+function GetGameMode(gameResultCard) {
+    return GetDataValueFromMatchData(gameResultCard, "filter-gameMode");
 }
+
+function ShowAllModesUsing(cssFilterClass, textContent) {
+
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var matchesToShow = allMatches;
+
+    ShowCardsWithCSSFilter(matchesToShow, cssFilterClass);
+
+    ModeCleanup(textContent);
+}
+
+function ShowOnlyArenaModesUsing(cssFilterClass, textContent) {
+    ShowMatchesWithSingleModeMatching("Arena", cssFilterClass, textContent);}
+
+function ShowOnlyWarzoneModesUsing(cssFilterClass, textContent) {
+    ShowMatchesWithSingleModeMatching("Warzone", cssFilterClass, textContent);
+}
+
+        function ShowMatchesWithSingleModeMatching(modeToMatch, cssFilterClass, textContent) {
+            var allMatches = document.getElementsByClassName("game-result-card");
+        
+            var matchesToShow = GetMatchesWithModeMatching(allMatches, modeToMatch);
+            var matchesToHide = GetMatchesWithModeNotMatching(allMatches, modeToMatch);
+        
+            ShowCardsWithCSSFilter(matchesToShow, cssFilterClass);
+            HideCardsWithCSSFilter(matchesToHide, cssFilterClass);
+        
+            ModeCleanup(textContent);
+        }
+
+    function ModeCleanup(textToReplace) {
+        var modeButton = document.getElementById("mode-filter-btn");
+        ChangeElementText(modeButton, textToReplace);
+    
+        RecalculateAggregateStats();
+    }
+
+    function GetMatchesWithModeMatching(gameResultCardsToSearch, modeToMatch) {
+        var matchesMatchingMode = [];
+
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            var mode = GetGameMode(gameResultCardsToSearch[i]);
+
+            if (mode === modeToMatch) {
+                matchesMatchingMode.push(gameResultCardsToSearch[i]);
+            }
+        }
+
+        return matchesMatchingMode;
+    }
+
+    function GetMatchesWithModeNotMatching(gameResultCardsToSearch, modeToMatch) {
+        var matchesNotMatchingMode = [];
+
+        for (var i = 0; i < gameResultCardsToSearch.length; i++) {
+            var mode = GetGameMode(gameResultCardsToSearch[i]);
+
+            if (! (mode === modeToMatch)) {
+                matchesNotMatchingMode.push(gameResultCardsToSearch[i]);
+            }
+        }
+
+        return matchesNotMatchingMode;
+    }

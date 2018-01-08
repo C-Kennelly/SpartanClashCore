@@ -19,6 +19,7 @@ namespace ServiceRecord.ViewModels
 
         public bool isWin { get; set; }
         public bool isClanBattle { get; set; }
+        public string gameMode { get; set; }
 
         private int team { get; set; }
         private string allyCompany { get; set; }
@@ -46,7 +47,34 @@ namespace ServiceRecord.ViewModels
 
             matchDate = (DateTime)match.MatchCompleteDate;
 
+            gameMode = SetGameMode(match);
+
             SetSortingFlags();
+        }
+
+        private string SetGameMode(TClashdevset match)
+        {
+            //Can we pull this from an API instead of hard coding?
+            //https://developer.haloapi.com/docs/services/58acdf27e2f7f71ad0dad84b/operations/58acdf28e2f7f70db4854b3b
+            //   Error = 0, 
+            //   Arena = 1, 
+            //   Campaign = 2, 
+            //   Custom = 3, 
+            //   Warzone = 4,
+            //   CustomLocal = 6.
+
+            if (match.GameMode == 1)
+            {
+                return "Arena";
+            }
+            else if(match.GameMode == 4)
+            {
+                return "Warzone";
+            }
+            else
+            {
+                return "Custom";
+            }
         }
 
         private void SetSortingFlags()
