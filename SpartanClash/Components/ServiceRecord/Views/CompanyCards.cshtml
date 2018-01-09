@@ -20,6 +20,21 @@
     <h3>Last refresh: @ViewData["LastRefreshDate"]</h3>
 
     <div class="filter-controls">
+        
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5 id="opponent-filter-btn">Against everyone</h5>
+            </button>
+            <div class="dropdown-menu">
+                <p class="dropdown-item" onclick="ShowAllOpponentsUsing('opponent-hidden', (this.textContent))">Against everyone</p>
+                <p class="dropdown-item" onclick="ShowOnlyClanOpponentsUsing('opponent-hidden', (this.textContent))">Clans only</p>
+                <p class="dropdown-item" onclick="ShowOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
+            </div>
+        </div>
+
+
+        <!--
+            
         <div class="filter-item">
             <button onclick="showDropdownContent('opponent-dropdown')" id="opponent-filter-btn" class="filter-btn">
                 <h5>Against everyone</h5>
@@ -30,10 +45,11 @@
                 <p onclick="ShowOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
             </div>
         </div>
-        
+        -->
+            
         <div class="filter-item">
             <button onclick="showDropdownContent('date-dropdown')" id="date-filter-btn" class="filter-btn">
-                <h5>Since launch day</h5>
+                <h5>Since site launch</h5>
             </button>
             <div id="date-dropdown" class="dropdown-content">
                 <p onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since site launch</p>
