@@ -109,7 +109,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    min-height: 40px;
 }
 
 .filter-item {
@@ -130,7 +130,7 @@
 
 
 /* Dropdown button on hover & focus */
-.fitler-btn:hover, .filter-btn:focus {
+.filter-btn:hover, .filter-btn:active {
     background-color: #444444;
 }
 
