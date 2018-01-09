@@ -4,6 +4,12 @@ function showDropdownContent(id) {
     document.getElementById(id).classList.toggle("show");
 }
 
+$(document).ready(function (event) {
+    if (event.target.matches('.filter-btn')) {
+        $('.filter-btn button').on('click touchstart', showDropdownContent(event.target));
+    }
+});
+
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
     if (!event.target.matches('.filter-btn')) {

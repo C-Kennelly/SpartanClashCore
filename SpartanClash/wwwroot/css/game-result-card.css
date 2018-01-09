@@ -123,17 +123,18 @@
 .filter-btn {
     background-color: #333333;
     width: 100%;
+    min-height: 100%;
     height: 100%;
     border: none;
     cursor: pointer;
 }
 
 
-/* Dropdown button on hover & focus 
+/* Dropdown button on hover & focus */
 .filter-btn:hover, .filter-btn:active {
     background-color: #444444;
 }
-*/
+
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
