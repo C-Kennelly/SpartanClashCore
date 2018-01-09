@@ -1,13 +1,13 @@
 ﻿/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function showDropdownContent(id) {
-    alert("codeWasCalled! with id: " + id);
+function showDropdownContent(id, sourceName) {
+    alert("codeWasCalled! with id: '" + id + "' from: " + sourceName);
     document.getElementById(id).classList.toggle("show");
 }
 
 $(document).ready(function (event) {
     if (event.target.matches('.filter-btn')) {
-        $('.filter-btn button').on('click touchstart', showDropdownContent(event.target));
+        $('.filter-btn button').on('click touchstart', showDropdownContent(event.target, "touch-Handler"));
     }
 });
 
