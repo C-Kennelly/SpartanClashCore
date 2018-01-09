@@ -129,10 +129,11 @@
 }
 
 
-/* Dropdown button on hover & focus */
+/* Dropdown button on hover & focus 
 .filter-btn:hover, .filter-btn:active {
     background-color: #444444;
 }
+*/
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
