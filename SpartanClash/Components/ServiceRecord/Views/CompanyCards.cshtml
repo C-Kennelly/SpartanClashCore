@@ -21,7 +21,7 @@
 
     <div class="filter-controls">
         <div class="filter-item">
-            <button onclick="showDropdownContent('opponent-dropdown', 'on-Click')" id="opponent-filter-btn" class="filter-btn">
+            <button onclick="showDropdownContent('opponent-dropdown')" id="opponent-filter-btn" class="filter-btn">
                 <h5>Against everyone</h5>
             </button>
             <div id="opponent-dropdown" class="dropdown-content">
@@ -36,7 +36,7 @@
                 <h5>Since launch day</h5>
             </button>
             <div id="date-dropdown" class="dropdown-content">
-                <p onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since launch day</p>
+                <p onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since site launch</p>
                 <p onclick="ShowOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">Last 30 days</p>
             </div>
         </div>

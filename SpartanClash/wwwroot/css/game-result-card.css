@@ -131,11 +131,10 @@
 
 
 /* Dropdown button on hover & focus */
-.filter-btn:hover, .filter-btn:active {
+/*.filter-btn:hover, .filter-btn:active {
     background-color: #444444;
 }
-
-
+*/
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
@@ -156,9 +155,11 @@
 }
 
 /* Change color of dropdown links on hover */
+/*
 .dropdown-content p:hover {
     background-color: #999999
 }
+*/
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
