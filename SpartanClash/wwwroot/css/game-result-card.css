@@ -115,15 +115,18 @@
     box-shadow: 5px 5px 5px #333333;
     margin-bottom: 36px;
     z-index: -10;
+    cursor: pointer;
 }
-
-
 
 /*Game-Result Spacers*/
 .game-result-spacer {
     width: 40%;
     background-color: black;
     position: relative;
+}
+
+.hidden {
+    display: none;
 }
 
 .spacer-image {

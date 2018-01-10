@@ -105,8 +105,10 @@ function HideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
     }
 }
 
-
-
+function ToggleSpacerWithCSSFilter(caller, cssFilterClass) {
+    var spacerElement = caller.getElementsByClassName('game-result-spacer');
+    spacerElement[0].classList.toggle(cssFilterClass);
+}
 
 
 

@@ -91,12 +91,12 @@ else
     
         @if (battle.GetTeam() == 1)
         {
-            <div class="game-result-card">
+            <div class="game-result-card" onclick="ToggleSpacerWithCSSFilter(this, 'hidden')">
                 <div class="team-result team-result-ally team-result-red">
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
-                <div class="game-result-spacer">
+                <div class="game-result-spacer hidden">
                     <div class="spacer-image-background">
                         <img class="spacer-image" src="@battle.GetMapImageURL()" />
                     </div>
@@ -124,12 +124,12 @@ else
         }
         else
         {
-            <div class="game-result-card">
+            <div class="game-result-card" onclick="ToggleSpacerWithCSSFilter(this, 'hidden')">
                 <div class="team-result team-result-ally team-result-blue">
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
-                <div class="game-result-spacer">
+                <div class="game-result-spacer hidden">
                     <div class="spacer-image-background">
                         <img class="spacer-image" src="@battle.GetMapImageURL()" />
                     </div>
