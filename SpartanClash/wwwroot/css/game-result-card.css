@@ -102,7 +102,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    min-height: 40px;
 }
 
 .btn-group { /*.filter-item*/
@@ -115,7 +114,8 @@
 .btn-xs { /*.filter-btn*/
     background-color: #333333;
     width: 100%;
-    min-height: 100%;
+    line-height: 1.5em;
+    min-height: 4.5em;
     height: 100%;
     border: none;
     cursor: pointer;
