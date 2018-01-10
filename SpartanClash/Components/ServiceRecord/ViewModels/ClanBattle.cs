@@ -21,6 +21,9 @@ namespace ServiceRecord.ViewModels
         public bool isClanBattle { get; set; }
         public string gameMode { get; set; }
 
+        public string mapName { get; set; }
+        private string mapImageURL { get; set; }
+
         private int team { get; set; }
         private string allyCompany { get; set; }
         private string enemyCompany1 { get; set; }
@@ -44,6 +47,10 @@ namespace ServiceRecord.ViewModels
 
             SetHeader(out allyHeader, primaryCompany, allyCompany);
             SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
+
+            TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
+            mapName = metadataRecord.PrintableName;
+            mapImageURL = metadataRecord.ImageUrl;
 
             matchDate = (DateTime)match.MatchCompleteDate;
 
@@ -96,6 +103,11 @@ namespace ServiceRecord.ViewModels
             {
                 isClanBattle = true;
             }
+        }
+
+        public string GetMapImageURL()
+        {
+            return mapImageURL;
         }
 
         public int GetTeam()

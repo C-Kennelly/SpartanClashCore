@@ -96,7 +96,17 @@ else
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
-                <div class="game-result-spacer-red-active"></div>
+                <div class="game-result-spacer">
+                    <div class="spacer-image-background">
+                        <img class="spacer-image" src="@battle.GetMapImageURL()" />
+                    </div>
+                    <div class="spacer-overlay">
+                        <h5>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString(), @battle.matchDate.Year</h5>
+                        <br/>
+                        <br/>
+                        <h5>@battle.gameMode</h5>
+                    </div>
+                </div>
                 <div class="team-result team-result-enemy team-result-blue">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
@@ -119,7 +129,17 @@ else
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
-                <div class="game-result-spacer-blue-active"></div>
+                <div class="game-result-spacer">
+                    <div class="spacer-image-background">
+                        <img class="spacer-image" src="@battle.GetMapImageURL()" />
+                    </div>
+                    <div class="spacer-overlay">
+                        <h5>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString(), @battle.matchDate.Year</h5>
+                        <br />
+                        <br />
+                        <h5>@battle.gameMode</h5>
+                    </div>
+                </div>
                 <div class="team-result team-result-enemy team-result-red">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
