@@ -17,10 +17,9 @@
 
 <div class="company-title-header">
     <h1><b>@companyName</b></h1>
-    <h3>Last refresh: @ViewData["LastRefreshDate"]</h3>
 
     <div class="filter-controls">
-        
+    
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 id="opponent-filter-btn">Against everyone</h5>
@@ -31,44 +30,29 @@
                 <p class="dropdown-item" onclick="ShowOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
             </div>
         </div>
-
-
-        <!--
-            
-        <div class="filter-item">
-            <button onclick="showDropdownContent('opponent-dropdown')" id="opponent-filter-btn" class="filter-btn">
-                <h5>Against everyone</h5>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5 id="date-filter-btn">Against everyone</h5>
             </button>
-            <div id="opponent-dropdown" class="dropdown-content">
-                <p onclick="ShowAllOpponentsUsing('opponent-hidden', (this.textContent))">Against everyone</p>
-                <p onclick="ShowOnlyClanOpponentsUsing('opponent-hidden', (this.textContent))">Clans only</p>
-                <p onclick="ShowOnlyNonClanOpponentsUsing('opponent-hidden', (this.textContent))">Randoms only</p>
+            <div class="dropdown-menu">
+                <p class="dropdown-item" onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since site launch</p>
+                <p class="dropdown-item" onclick="ShowOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">Last 30 days</p>
             </div>
         </div>
-        -->
-            
-        <div class="filter-item">
-            <button onclick="showDropdownContent('date-dropdown')" id="date-filter-btn" class="filter-btn">
-                <h5>Since site launch</h5>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5 id="mode-filter-btn">Against everyone</h5>
             </button>
-            <div id="date-dropdown" class="dropdown-content">
-                <p onclick="ShowAllDatesUsing('date-hidden', (this.textContent))">Since site launch</p>
-                <p onclick="ShowOnlyDatesForLast30DaysUsing('date-hidden', (this.textContent))">Last 30 days</p>
+            <div class="dropdown-menu">
+                <p class="dropdown-item" onclick="ShowAllModesUsing('mode-hidden', (this.textContent))">For all modes</p>
+                <p class="dropdown-item" onclick="ShowOnlyArenaModesUsing('mode-hidden', (this.textContent))">Arena only</p>
+                <p class="dropdown-item" onclick="ShowOnlyWarzoneModesUsing('mode-hidden', (this.textContent))">Warzone only</p>
             </div>
         </div>
 
-        <div class="filter-item">
-            <button onclick="showDropdownContent('mode-dropdown')" id="mode-filter-btn" class="filter-btn">
-                <h5>For all modes</h5>
-            </button>
-            <div id="mode-dropdown" class="dropdown-content">
-                <p onclick="ShowAllModesUsing('mode-hidden', (this.textContent))">For all modes</p>
-                <p onclick="ShowOnlyArenaModesUsing('mode-hidden', (this.textContent))">Arena only</p>
-                <p onclick="ShowOnlyWarzoneModesUsing('mode-hidden', (this.textContent))">Warzone only</p>
-            </div>
-        </div>
-    </div>
-</div>
+    </div> <!-- End filter controls-->
+
+</div>  <!-- End company title header-->
 
 @if (Model.Count() == 1)
 {

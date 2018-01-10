@@ -26,11 +26,6 @@ namespace ServiceRecord
 
         public ActionResult CompanyCards(string company)
         {
-            //TODO - set this per company or user session?
-            DateTime lastRefreshDate = GetLastRefreshDate();
-
-            ViewData["LastRefreshDate"] = lastRefreshDate.ToShortDateString();
-
             List<TClashdevset> companyMatches = _clashdbContext.TClashdevset
                 .Where(
                     x => (x.Team1Company1 == company
@@ -38,7 +33,7 @@ namespace ServiceRecord
                             || x.Team2Company1 == company
                             || x.Team2Company2 == company
                             )
-                ).ToList();//.OrderBy(x => x.MatchCompleteDate).ThenBy(x => x.MapId).ToList();
+                ).ToList();
 
             List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
 
@@ -62,6 +57,14 @@ namespace ServiceRecord
             return View(company);
         }
 
+
+        //Good code, but not in use until the logged in component.
+        //Need to decide if we're pulling the last refresh date, or if we're really after a user's last log on date.
+
+        //DateTime lastRefreshDate = GetLastRefreshDate();
+        //ViewData["LastRefreshDate"] = lastRefreshDate.ToShortDateString();
+
+        /*  
         private DateTime GetLastRefreshDate()
         {
             //Default day is the day before Halo 5 release date (thus includes all matches)
@@ -76,5 +79,6 @@ namespace ServiceRecord
 
             return result;
         }
+        */
     }
 }
