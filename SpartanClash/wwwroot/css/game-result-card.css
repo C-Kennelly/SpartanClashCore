@@ -112,7 +112,7 @@
     border: none;
 }
 
-.btn { /*.filter-btn*/
+.btn-xs { /*.filter-btn*/
     background-color: #333333;
     width: 100%;
     min-height: 100%;
@@ -120,7 +120,6 @@
     border: none;
     cursor: pointer;
     border-radius: 0;
-    font-size: 1.2vmin;
 }
 
 
