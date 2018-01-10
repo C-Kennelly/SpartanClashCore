@@ -100,9 +100,9 @@ else
                 <div class="team-result team-result-enemy team-result-blue">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
-                    {   <h3 class="enemy-clan-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
+                    {   <h3><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
                     else
-                    {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
+                    {   <h3>@battle.enemyHeader</h3> }
                 </div>
                 <div class="match-filter-data">
                     <p class="filter-isWin">@battle.isWin</p>
@@ -123,9 +123,9 @@ else
                 <div class="team-result team-result-enemy team-result-red">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
-                    {   <h3 class="enemy-clan-link"><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
+                    {   <h3><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
                     else
-                    {   <h3 class="non-clan-header">@battle.enemyHeader</h3> }
+                    {   <h3>@battle.enemyHeader</h3> }
                 </div>
                 <div class="match-filter-data">
                     <p class="filter-isWin">@battle.isWin</p>

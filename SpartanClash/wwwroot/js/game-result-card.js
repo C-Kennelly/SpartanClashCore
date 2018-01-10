@@ -2,106 +2,113 @@
 function MatchIsWin(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-isWin");
 }
-    /*  Common - Recalculation  ******/
-    
-    function RecalculateAggregateStats() {
-        var winCounter = 0;
-        var lossCounter = 0;
-        var allCards = document.getElementsByClassName("game-result-card");
-    
-        for (var i = 0; i < allCards.length; i++){
-    
-            if (MatchIsVisible(allCards[i]))
-            {
-                if (MatchIsWin(allCards[i]) === "True") {
-                    winCounter++;
-                }
-                else {
-                    lossCounter++;
-                }
-            }
-        }
-    
-        var winRatioText = CalculateWinRatioText(winCounter, lossCounter);
-    
-        UpdateWinLossRatioText(winCounter.toString(), lossCounter.toString(), winRatioText);
-    
-    }
 
-            function MatchIsVisible(gameResultCard) {
-            
-                if (gameResultCard.classList.contains("opponent-hidden")
-                    || gameResultCard.classList.contains("mode-hidden")
-                    || gameResultCard.classList.contains("date-hidden")
-                ) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+
+
+
+/*  Common - Recalculation  ******/
+ function RecalculateAggregateStats() {
+     var winCounter = 0;
+     var lossCounter = 0;
+     var allCards = document.getElementsByClassName("game-result-card");
+ 
+     for (var i = 0; i < allCards.length; i++){
+ 
+         if (MatchIsVisible(allCards[i]))
+         {
+             if (MatchIsWin(allCards[i]) === "True") {
+                 winCounter++;
+             }
+             else {
+                 lossCounter++;
+             }
+         }
+     }
+ 
+     var winRatioText = CalculateWinRatioText(winCounter, lossCounter);
+ 
+     UpdateWinLossRatioText(winCounter.toString(), lossCounter.toString(), winRatioText);
+ 
+ }
+
+         function MatchIsVisible(gameResultCard) {
+         
+             if (gameResultCard.classList.contains("opponent-hidden")
+                 || gameResultCard.classList.contains("mode-hidden")
+                 || gameResultCard.classList.contains("date-hidden")
+             ) {
+                 return false;
+             }
+             else {
+                 return true;
+             }
 }
 
-            function CalculateWinRatioText(winCount, lossCount) {
-                var winRatio = "--";
-                if (lossCount >= 1) {
-                    winRatio = (winCount / lossCount).toFixed(2).toString();
-                }
+         function CalculateWinRatioText(winCount, lossCount) {
+             var winRatio = "--";
+             if (lossCount >= 1) {
+                 winRatio = (winCount / lossCount).toFixed(2).toString();
+             }
 
-                return winRatio;
-            }
+             return winRatio;
+         }
 
-            function UpdateWinLossRatioText(winText, lossText, ratioText) {
-                var winCountElement = document.getElementById("winCount");
-                var lossCountElement = document.getElementById("lossCount");
-                var winRatioElement = document.getElementById("winRatio");
-            
-                ChangeElementText(winCountElement, winText.toString());
-                ChangeElementText(lossCountElement, lossText.toString());
-                ChangeElementText(winRatioElement, ratioText);
-            }
-
-            
+         function UpdateWinLossRatioText(winText, lossText, ratioText) {
+             var winCountElement = document.getElementById("winCount");
+             var lossCountElement = document.getElementById("lossCount");
+             var winRatioElement = document.getElementById("winRatio");
+         
+             ChangeElementText(winCountElement, winText.toString());
+             ChangeElementText(lossCountElement, lossText.toString());
+             ChangeElementText(winRatioElement, ratioText);
+         }
 
 
 
 
-    /*  Common - MatchData  ******/
-    function GetDataValueFromMatchData(gameResultCard, dataElementToSearch)
-    {
-        var matchData = GetMatchDataFromCard(gameResultCard);
-        var dataElement = GetDataElementFromMatchData(matchData, dataElementToSearch);
-    
-        return dataElement.textContent;
-    }
+/*  Common - MatchData  ******/
+function GetDataValueFromMatchData(gameResultCard, dataElementToSearch)
+{
+    var matchData = GetMatchDataFromCard(gameResultCard);
+    var dataElement = GetDataElementFromMatchData(matchData, dataElementToSearch);
 
-        function GetMatchDataFromCard(gameResultCard) {
-            var matchData = gameResultCard.getElementsByClassName("match-filter-data")[0];
-            return matchData;
-        }
-        
-        function GetDataElementFromMatchData(matchData, dataElementToSearch) {
-            var dataElement = matchData.getElementsByClassName(dataElementToSearch)[0];
-            return dataElement;
-        }
+    return dataElement.textContent;
+}
 
-
-
-    /*  Common - Display  ******/
-    function ChangeElementText(element, newText) {
-        element.textContent = newText;
+    function GetMatchDataFromCard(gameResultCard) {
+        var matchData = gameResultCard.getElementsByClassName("match-filter-data")[0];
+        return matchData;
     }
     
-    function ShowCardsWithCSSFilter(cardsToShow, cssFilterClass) {
-        for (var i = 0; i < cardsToShow.length; i++) {
-            cardsToShow[i].classList.remove(cssFilterClass);
-        }
+    function GetDataElementFromMatchData(matchData, dataElementToSearch) {
+        var dataElement = matchData.getElementsByClassName(dataElementToSearch)[0];
+        return dataElement;
     }
-    
-    function HideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
-        for (var i = 0; i < cardsToHide.length; i++) {
-            cardsToHide[i].classList.add(cssFilterClass);
-        }
+
+
+
+
+/*  Common - Display  ******/
+function ChangeElementText(element, newText) {
+    element.textContent = newText;
+}
+
+function ShowCardsWithCSSFilter(cardsToShow, cssFilterClass) {
+    for (var i = 0; i < cardsToShow.length; i++) {
+        cardsToShow[i].classList.remove(cssFilterClass);
     }
+}
+
+function HideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
+    for (var i = 0; i < cardsToHide.length; i++) {
+        cardsToHide[i].classList.add(cssFilterClass);
+    }
+}
+
+
+
+
+
 
 
 
@@ -112,21 +119,14 @@ function MatchIsClanBattle(gameResultCard) {
 
 function ShowAllOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
+
     ShowCardsWithCSSFilter(allMatches, cssFilterClass);
-
-    //var clanMatches = GetClanMatches(allMatches);
-    //var nonClanMatches = GetNonClanMatches(allMatches);
-
-    //showCardsWithCSSFilter(clanMatches, cssFilterClass);
-    //showCardsWithCSSFilter(nonClanMatches, cssFilterClass);
-
 
     OpponentCleanup(textContent);
 }
 
 function ShowOnlyClanOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
-
     var clanMatches = GetClanMatches(allMatches);
     var nonClanMatches = GetNonClanMatches(allMatches);
 
@@ -138,7 +138,6 @@ function ShowOnlyClanOpponentsUsing(cssFilterClass, textContent) {
 
 function ShowOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
-
     var clanMatches = GetClanMatches(allMatches);
     var nonClanMatches = GetNonClanMatches(allMatches);
 
@@ -179,6 +178,8 @@ function ShowOnlyNonClanOpponentsUsing(cssFilterClass, textContent) {
 
         return nonClanMatches;
     }
+
+
 
 
 /*  Filtering - Date  ******/
@@ -256,6 +257,7 @@ function ShowOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
 
         return matchesBeforeChosenDate;
     }
+
 
 
 
