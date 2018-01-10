@@ -93,7 +93,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    height: 116px;
+    height: 150px;
     border: 3px solid #000000;
     box-shadow: 5px 5px 5px #333333;
     margin-bottom: 36px;
@@ -102,23 +102,23 @@
     /*Game-Result Spacers*/
     .game-result-spacer-red-active {
         width: 0;
-        height: 110px;
-        border-bottom: 110px solid darkslateblue;
-        border-left: 110px solid firebrick;
+        height: 144px;
+        border-bottom: 144px solid darkslateblue;
+        border-left: 144px solid firebrick;
     }
     
     .game-result-spacer-blue-active {
         width: 0;
-        height: 110px;
-        border-bottom: 110px solid firebrick;
-        border-left: 110px solid darkslateblue;
+        height: 144px;
+        border-bottom: 144px solid firebrick;
+        border-left: 144px solid darkslateblue;
     }
 
     /*Team Result Elements (Game Result)*/
     .team-result {
         color: #ffffff;
         text-align: center;
-        height: 110px;
+        height: 144px;
         width: 40%;
         border: 0;
     }
