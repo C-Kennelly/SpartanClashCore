@@ -1,4 +1,22 @@
-﻿/*  Common - ******/
+﻿window.onload = function () {
+    StopEventPropagationOnAllAnchorElements();
+};
+
+
+    function StopEventPropagationOnAllAnchorElements() {
+        var allAnchorsInDocument = document.getElementsByTagName('a');
+        for (i = 0, len = allAnchorsInDocument.length; i < len; i++) {
+            allAnchorsInDocument[i].addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        }
+    }
+
+
+
+
+
+/*  Common - ******/
 function MatchIsWin(gameResultCard) {
     return GetDataValueFromMatchData(gameResultCard, "filter-isWin");
 }
@@ -109,6 +127,7 @@ function ToggleSpacerWithCSSFilter(caller, cssFilterClass) {
     var spacerElement = caller.getElementsByClassName('game-result-spacer');
     spacerElement[0].classList.toggle(cssFilterClass);
 }
+
 
 
 
