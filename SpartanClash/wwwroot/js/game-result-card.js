@@ -213,7 +213,7 @@ function ShowOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
 }
 
         function MakeDateXDaysInPast(daysInPast) {
-            var today = new Date()
+            var today = new Date();
             var priorDate = new Date().setDate(today.getDate() - daysInPast);
         
             return new Date(priorDate);
