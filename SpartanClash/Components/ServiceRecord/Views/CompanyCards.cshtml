@@ -96,19 +96,21 @@ else
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
+                <div class="spacer-bar red-spacer-bar hidden"></div>
                 <div class="game-result-spacer hidden">
                     <div class="spacer-image-background">
                         <img class="spacer-image" src="@battle.GetMapImageURL()" />
                     </div>
                     <div class="spacer-overlay">
                         <div class="spacer-item">
-                            <h5>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h5>
+                            <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
                         </div>
                         <div class="spacer-item">
-                            <h5>@battle.gameMode</h5>
+                            <h4>@battle.gameMode</h4>
                         </div>
                     </div>
                 </div>
+                <div class="spacer-bar blue-spacer-bar hidden"></div>
                 <div class="team-result team-result-enemy team-result-blue">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
@@ -131,19 +133,21 @@ else
                     <h2>@battle.score</h2>
                     <h3>@battle.primaryCompany</h3>
                 </div>
+                <div class="spacer-bar blue-spacer-bar hidden"></div>
                 <div class="game-result-spacer hidden">
                     <div class="spacer-image-background">
                         <img class="spacer-image" src="@battle.GetMapImageURL()" />
                     </div>
                     <div class="spacer-overlay">
                         <div class="spacer-item">
-                            <h5>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h5>
+                            <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
                         </div>
                         <div class="spacer-item">
-                            <h5>@battle.gameMode</h5>
+                            <h4>@battle.gameMode</h4>
                         </div>
                     </div>
                 </div>
+                <div class="spacer-bar red-spacer-bar hidden"></div>
                 <div class="team-result team-result-enemy team-result-red">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)

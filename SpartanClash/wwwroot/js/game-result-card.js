@@ -124,8 +124,28 @@ function HideCardsWithCSSFilter(cardsToHide, cssFilterClass) {
 }
 
 function ToggleSpacerWithCSSFilter(caller, cssFilterClass) {
+
+    var elementsToToggle = [];
+
     var spacerElement = caller.getElementsByClassName('game-result-spacer');
-    spacerElement[0].classList.toggle(cssFilterClass);
+    elementsToToggle.push(spacerElement[0]);
+
+    var spacerBars = caller.getElementsByClassName('spacer-bar');
+    for (var i = 0; i < spacerBars.length; i++) {
+        elementsToToggle.push(spacerBars[i]);
+    }
+
+    var teamResultCards = caller.getElementsByClassName('team-result');
+    for (var j = 0; j < teamResultCards.length; j++) {
+        elementsToToggle.push(teamResultCards[j]);
+    }
+
+
+
+    for (var k = 0; k < elementsToToggle.length; k++) {
+        elementsToToggle[k].classList.toggle(cssFilterClass);
+    }
+
 }
 
 
