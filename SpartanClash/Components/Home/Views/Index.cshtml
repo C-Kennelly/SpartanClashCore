@@ -2,15 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script>
-    $(function () {
-        $("#srch-companies").autocomplete({
-            source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
-            position: { my: "left top", at: "left bottom", collision: "none" },
-            delay: 0
-            });
-    });
-</script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#srch-companies").autocomplete({
+                source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
+                position: { my: "left top", at: "left bottom", collision: "none" },
+                delay: 0
+                });
+        });
+    </script>
 
 <div class="jumbotron front-page-jumbotron">
     <h2>Fight together, Spartan.</h2>
