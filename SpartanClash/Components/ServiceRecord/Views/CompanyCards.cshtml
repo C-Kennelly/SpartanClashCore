@@ -108,12 +108,9 @@ else
                         <div class="spacer-item">
                             <h4>@battle.gameMode</h4>
                         </div>
-                        <div class="spacer-item">
-                            <a href="www.google.com">Details</a>
-                        </div>
                     </div>
                 </div>
-                <div class="spacer-bar blue-spacer-bar hidden">                </div>
+                <div class="spacer-bar blue-spacer-bar hidden"></div>
                 <div class="team-result team-result-enemy team-result-blue">
                     <h2>@battle.enemyScore</h2>
                     @if (battle.isClanBattle)
@@ -144,9 +141,6 @@ else
                     <div class="spacer-overlay">
                         <div class="spacer-item">
                             <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
-                        </div>
-                        <div class="spacer-item">
-                            <h4>@battle.gameMode</h4>
                         </div>
                         <div class="spacer-item">
                             <a href="www.google.com">Details</a>
