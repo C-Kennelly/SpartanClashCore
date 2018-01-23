@@ -70,7 +70,7 @@ namespace ServiceRecord
             //Default day is the day before Halo 5 release date (thus includes all matches)
             DateTime defaultDate = new DateTime(2015, 10, 26);
 
-            DateTime result = _clashdbContext.TClashmetadata.Where(x => x.Id == 0).Select(x => x.DataRefreshDate).FirstOrDefault();
+            DateTime result = _clashdbContext.TClashmetadata.Where(x => x.Id == "active").Select(x => x.DataRefreshDate).FirstOrDefault();
 
             if (result == null)
             {
