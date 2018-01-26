@@ -79,7 +79,7 @@ namespace ServiceRecord
                 return View("NoCompaniesFound", company);
             }
 
-            return View( battles.OrderByDescending(battle => battle.isClanBattle).ThenBy(battle => battle.enemyHeader) );
+            return View( battles.OrderByDescending(battle => battle.isClanBattle).ThenBy(battle => battle.enemyHeader).ThenByDescending(battle => battle.matchDate) );
         }
 
         public ActionResult NoCompaniesFound(string company)
