@@ -50,11 +50,14 @@ namespace ServiceRecord
 
             List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
 
+            List<TMapmetadata> mapMetaData = _clashdbContext.TMapmetadata.ToList();
+            List<TCompanies> allCompanies = _clashdbContext.TCompanies.ToList();
+
             foreach (TClashdevset match in companyMatches)
             {
                 bool isTeamGame = BitConverter.ToBoolean(match.IsTeamGame, 0);
              
-                ClanBattle battle = new ClanBattle(company, match, _clashdbContext);
+                ClanBattle battle = new ClanBattle(company, match, _clashdbContext, mapMetaData, allCompanies);
 
                 if(isTeamGame)
                 {

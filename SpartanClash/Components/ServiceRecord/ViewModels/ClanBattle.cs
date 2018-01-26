@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using SpartanClash.Models.ClashDB;
 
 
@@ -39,7 +40,7 @@ namespace ServiceRecord.ViewModels
             _clashdbContext = context;
         }
 
-        public ClanBattle(string companyName, TClashdevset match, clashdbContext context)
+        public ClanBattle(string companyName, TClashdevset match, clashdbContext context, List<TMapmetadata > mapMetaData, List<TCompanies> companyRoster)
         {
             _clashdbContext = context;
 
@@ -51,9 +52,9 @@ namespace ServiceRecord.ViewModels
             DetermineTeamSpecificComponents(match);
 
             allyHeader = companyName;
-            SetEnemyHeader(out enemyHeader, enemyCompany);
+            SetEnemyHeader(out enemyHeader, enemyCompany, companyRoster);
 
-            TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
+            TMapmetadata metadataRecord = mapMetaData.Where(record => record.MapId == match.MapId).FirstOrDefault();
             mapName = metadataRecord.PrintableName;
             mapImageURL = metadataRecord.ImageUrl;
 
@@ -135,8 +136,6 @@ namespace ServiceRecord.ViewModels
 
         private void DetermineTeamSpecificComponents(TClashdevset match)
         {
-            TMatchparticipants matchParticipantRecord = _clashdbContext.TMatchparticipants.Find(match.MatchId);
-
 
             if (team == 1) //Company is on team 1
             {
@@ -173,7 +172,7 @@ namespace ServiceRecord.ViewModels
 
         }
 
-        private void SetEnemyHeader(out string header, string enemyCompanyId)
+        private void SetEnemyHeader(out string header, string enemyCompanyId, List<TCompanies> companyRoster)
         {
             if (enemyCompanyId == missingCompanyValue)
             {
@@ -181,7 +180,7 @@ namespace ServiceRecord.ViewModels
             }
             else
             {
-                TCompanies companyRecord = _clashdbContext.TCompanies.Where(record => record.CompanyId == enemyCompanyId).FirstOrDefault();
+                TCompanies companyRecord = companyRoster.Where(record => record.CompanyId == enemyCompanyId).FirstOrDefault();
 
                 if (companyRecord != null)
                 {
