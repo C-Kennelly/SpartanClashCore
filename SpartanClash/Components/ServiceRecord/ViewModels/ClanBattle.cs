@@ -13,6 +13,7 @@ namespace ServiceRecord.ViewModels
         public string primaryCompany { get; set; }
         public string allyHeader;
         public string enemyHeader;
+        public string gamertagFromCompany;
 
         public int score { get; set; }
         public int enemyScore { get; set; }
@@ -41,6 +42,8 @@ namespace ServiceRecord.ViewModels
             _clashdbContext = context;
 
             primaryCompany = companyName;
+
+
 
             DetermineTeam(match);
             DetermineTeamSpecificComponents(match);
@@ -125,8 +128,12 @@ namespace ServiceRecord.ViewModels
 
         private void DetermineTeamSpecificComponents(TClashdevset match)
         {
+            TMatchparticipants matchParticipantRecord = _clashdbContext.TMatchparticipants.Find(match.MatchId);
+
+
             if (team == 1) //Company is on team 1
             {
+                gamertagFromCompany = matchParticipantRecord.GetTeamGamertagsFromField(matchParticipantRecord.Team1Players).FirstOrDefault();
                 enemyCompany = match.Team2Company;
 
                 if (match.Team1Score != null)
@@ -143,6 +150,7 @@ namespace ServiceRecord.ViewModels
             }
             else //Company is on team 2.
             {
+                gamertagFromCompany = matchParticipantRecord.GetTeamGamertagsFromField(matchParticipantRecord.Team2Players).FirstOrDefault();
                 enemyCompany = match.Team1Company;
 
                 if (match.Team2Score != null)
