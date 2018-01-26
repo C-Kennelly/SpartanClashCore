@@ -13,7 +13,7 @@ namespace ServiceRecord.ViewModels
         public string primaryCompany { get; set; }
         public string allyHeader;
         public string enemyHeader;
-        public string gamertagFromCompany;
+        
 
         public int score { get; set; }
         public int enemyScore { get; set; }
@@ -29,6 +29,8 @@ namespace ServiceRecord.ViewModels
         private int team { get; set; }
         private string enemyCompany { get; set; }
 
+        private string matchId;
+        private string gamertagFromCompany { get; set; }
 
         clashdbContext _clashdbContext;
 
@@ -43,7 +45,7 @@ namespace ServiceRecord.ViewModels
 
             primaryCompany = companyName;
 
-
+            matchId = match.MatchId;
 
             DetermineTeam(match);
             DetermineTeamSpecificComponents(match);
@@ -60,6 +62,11 @@ namespace ServiceRecord.ViewModels
             gameMode = SetGameMode(match);
 
             SetSortingFlags();
+        }
+
+        public string GetWaypointDetailsURL()
+        {
+            return WaypointURLBuilder.GetWaypointURL(gameMode, matchId, gamertagFromCompany);
         }
 
         private string SetGameMode(TClashdevset match)
