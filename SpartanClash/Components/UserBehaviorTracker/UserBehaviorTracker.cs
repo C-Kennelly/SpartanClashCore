@@ -22,7 +22,7 @@ namespace UserBehaviorTracking
 
             if (companyName != null && companyName != "")
             {
-                companyRecord = _clashdbContext.TCompanies.Find(companyName);
+                companyRecord = _clashdbContext.TCompanies.Where(record => record.CompanyName == companyName).FirstOrDefault();
             }
 
             if (companyRecord != null)

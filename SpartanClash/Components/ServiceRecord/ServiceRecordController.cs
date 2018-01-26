@@ -52,16 +52,24 @@ namespace ServiceRecord
 
             foreach (TClashdevset match in companyMatches)
             {
+                bool isTeamGame = BitConverter.ToBoolean(match.IsTeamGame, 0);
+             
                 ClanBattle battle = new ClanBattle(company, match, _clashdbContext);
 
-                if(battle.allyHeader != battle.enemyHeader)
+                if(isTeamGame)
                 {
-                    battles.Add(battle);
+                    if (battle.allyHeader != battle.enemyHeader)
+                    {
+
+                        battles.Add(battle);
+                    }
+                    else
+                    {
+                        //Company fought itself, we would need Fireteams to reflect this without looking silly.
+                    }
                 }
-                else
-                {
-                    //Company fought itself, we would need Fireteams to reflect this without looking silly.
-                }
+
+                
             }
 
             _userBehaviorTracker.LogCompanySearch(company);
