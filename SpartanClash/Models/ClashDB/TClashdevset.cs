@@ -30,10 +30,12 @@ namespace SpartanClash.Models.ClashDB
         public string Team1Company { get; set; }
         public int Team1Rank { get; set; }
         public uint? Team1Score { get; set; }
+        public string Team1Gamertag { get; set; }
         public int? Team1Dnfcount { get; set; }
         public string Team2Company { get; set; }
         public int Team2Rank { get; set; }
         public uint? Team2Score { get; set; }
+        public string Team2Gamertag { get; set; }
         public int? Team2Dnfcount { get; set; }
         public int Status { get; set; }
 

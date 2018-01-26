@@ -140,7 +140,7 @@ namespace ServiceRecord.ViewModels
 
             if (team == 1) //Company is on team 1
             {
-                gamertagFromCompany = matchParticipantRecord.GetTeamGamertagsFromField(matchParticipantRecord.Team1Players).FirstOrDefault();
+                gamertagFromCompany = match.Team1Gamertag;
                 enemyCompany = match.Team2Company;
 
                 if (match.Team1Score != null)
@@ -157,7 +157,7 @@ namespace ServiceRecord.ViewModels
             }
             else //Company is on team 2.
             {
-                gamertagFromCompany = matchParticipantRecord.GetTeamGamertagsFromField(matchParticipantRecord.Team2Players).FirstOrDefault();
+                gamertagFromCompany = match.Team2Gamertag;
                 enemyCompany = match.Team1Company;
 
                 if (match.Team2Score != null)
