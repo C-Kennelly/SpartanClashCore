@@ -45,14 +45,14 @@ namespace ServiceRecord.ViewModels
             _clashdbContext = context;
 
             primaryCompany = companyName;
-
             matchId = match.MatchId;
 
-            DetermineTeam(match);
+
+            DetermineTeam(match, companyRoster);
             DetermineTeamSpecificComponents(match);
 
-            allyHeader = companyName;
-            SetEnemyHeader(out enemyHeader, enemyCompany, companyRoster);
+            allyHeader = primaryCompany;
+            SetEnemyHeader(enemyCompany, companyRoster);
 
             TMapmetadata metadataRecord = mapMetaData.Where(record => record.MapId == match.MapId).FirstOrDefault();
             mapName = metadataRecord.PrintableName;
@@ -127,9 +127,12 @@ namespace ServiceRecord.ViewModels
             return team;
         }
 
-        private void DetermineTeam(TClashdevset match)
+        private void DetermineTeam(TClashdevset match, List<TCompanies> companyRoster)
         {
-            if (primaryCompany == match.Team1Company)
+            string primaryCompanyId = companyRoster.Where(record => record.CompanyName == primaryCompany).FirstOrDefault().CompanyId;
+
+
+            if (primaryCompanyId == match.Team1Company)
             { team = 1; }
             else { team = 2; }
         }
@@ -172,11 +175,11 @@ namespace ServiceRecord.ViewModels
 
         }
 
-        private void SetEnemyHeader(out string header, string enemyCompanyId, List<TCompanies> companyRoster)
+        private void SetEnemyHeader(string enemyCompanyId, List<TCompanies> companyRoster)
         {
             if (enemyCompanyId == missingCompanyValue)
             {
-                header = printableMissingCompanyValue;
+                enemyHeader = printableMissingCompanyValue;
             }
             else
             {
@@ -184,12 +187,12 @@ namespace ServiceRecord.ViewModels
 
                 if (companyRecord != null)
                 {
-                    header = companyRecord.CompanyName;
+                    enemyHeader = companyRecord.CompanyName;
 
                 }
                 else
                 {
-                    header = printableMissingCompanyValue;
+                    enemyHeader = printableMissingCompanyValue;
                 }
             
             }

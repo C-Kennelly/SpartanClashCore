@@ -43,10 +43,12 @@ namespace ServiceRecord
                 .Where( //Arena or Warzome match, with company participation.
                     (x => (x.GameMode == arenaGameModeNumber 
                                 || x.GameMode == warzoneGameModeNumber)
-                          && (x.Team1Company == companyId 
+                          && (     x.Team1Company == companyId 
                                 || x.Team2Company == companyId)
                     )
                 ).ToList();
+
+            int count = companyMatches.Count;
 
             List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
 
@@ -61,15 +63,7 @@ namespace ServiceRecord
 
                 if(isTeamGame)
                 {
-                    if (battle.allyHeader != battle.enemyHeader)
-                    {
-
-                        battles.Add(battle);
-                    }
-                    else
-                    {
-                        //Company fought itself, we would need Fireteams to reflect this without looking silly.
-                    }
+                    battles.Add(battle);
                 }
 
                 
