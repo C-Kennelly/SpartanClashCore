@@ -33,7 +33,7 @@ namespace Home
                 //var companies = db.TCompanies.SelectMany(record => record.Company).ToArray();
 
                 var companies = from t in db.TCompanies
-                                select t.Company;
+                                select t.CompanyName;
 
                 var filteredCompanies = companies.Where(
                     company => company.IndexOf(term,

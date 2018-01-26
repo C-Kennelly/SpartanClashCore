@@ -27,16 +27,17 @@ namespace SpartanClash.Models.ClashDB
         public string MatchDuration { get; set; }
         public byte[] IsTeamGame { get; set; }
         public string SeasonId { get; set; }
-        public string Team1Company1 { get; set; }
-        public string Team1Company2 { get; set; }
-        public string Team2Company1 { get; set; }
-        public string Team2Company2 { get; set; }
+        public string Team1Company { get; set; }
         public int Team1Rank { get; set; }
-        public int Team2Rank { get; set; }
         public uint? Team1Score { get; set; }
+        public int? Team1Dnfcount { get; set; }
+        public string Team2Company { get; set; }
+        public int Team2Rank { get; set; }
         public uint? Team2Score { get; set; }
+        public int? Team2Dnfcount { get; set; }
         public int Status { get; set; }
 
+        public TMatchparticipants TMatchparticipants { get; set; }
         public ICollection<TCompany2matches> TCompany2matches { get; set; }
     }
 }

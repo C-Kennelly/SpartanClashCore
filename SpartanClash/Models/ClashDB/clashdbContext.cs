@@ -11,19 +11,17 @@ namespace SpartanClash.Models.ClashDB
         public virtual DbSet<TCompanies> TCompanies { get; set; }
         public virtual DbSet<TCompany2matches> TCompany2matches { get; set; }
         public virtual DbSet<TMapmetadata> TMapmetadata { get; set; }
+        public virtual DbSet<TMatchparticipants> TMatchparticipants { get; set; }
 
         public clashdbContext(DbContextOptions<clashdbContext> options)
-            :base(options)
+            : base(options)
         {
 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
 
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,7 +36,9 @@ namespace SpartanClash.Models.ClashDB
                     .HasName("MatchId")
                     .IsUnique();
 
-                entity.Property(e => e.MatchId).HasMaxLength(64);
+                entity.Property(e => e.MatchId)
+                    .HasColumnName("matchId")
+                    .HasMaxLength(64);
 
                 entity.Property(e => e.GameBaseVariantId)
                     .HasColumnName("GameBaseVariantID")
@@ -96,13 +96,14 @@ namespace SpartanClash.Models.ClashDB
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
 
-                entity.Property(e => e.Team1Company1)
-                    .HasColumnName("Team1_Company1")
+                entity.Property(e => e.Team1Company)
+                    .HasColumnName("Team1_Company")
                     .HasColumnType("text");
 
-                entity.Property(e => e.Team1Company2)
-                    .HasColumnName("Team1_Company2")
-                    .HasColumnType("text");
+                entity.Property(e => e.Team1Dnfcount)
+                    .HasColumnName("Team1_DNFCount")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'-1'");
 
                 entity.Property(e => e.Team1Rank)
                     .HasColumnName("Team1_Rank")
@@ -111,13 +112,14 @@ namespace SpartanClash.Models.ClashDB
 
                 entity.Property(e => e.Team1Score).HasColumnName("Team1_Score");
 
-                entity.Property(e => e.Team2Company1)
-                    .HasColumnName("Team2_Company1")
+                entity.Property(e => e.Team2Company)
+                    .HasColumnName("Team2_Company")
                     .HasColumnType("text");
 
-                entity.Property(e => e.Team2Company2)
-                    .HasColumnName("Team2_Company2")
-                    .HasColumnType("text");
+                entity.Property(e => e.Team2Dnfcount)
+                    .HasColumnName("Team2_DNFCount")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'-1'");
 
                 entity.Property(e => e.Team2Rank)
                     .HasColumnName("Team2_Rank")
@@ -143,26 +145,26 @@ namespace SpartanClash.Models.ClashDB
 
             modelBuilder.Entity<TCompanies>(entity =>
             {
-                entity.HasKey(e => e.Company);
+                entity.HasKey(e => e.CompanyId);
 
                 entity.ToTable("t_companies");
 
-                entity.HasIndex(e => e.Company)
+                entity.HasIndex(e => e.CompanyId)
                     .HasName("company")
                     .IsUnique();
 
-                entity.Property(e => e.Company)
-                    .HasColumnName("company")
-                    .HasMaxLength(32);
+                entity.Property(e => e.CompanyId)
+                    .HasColumnName("companyId")
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasColumnName("companyName")
+                    .HasMaxLength(128);
 
                 entity.Property(e => e.Losses)
                     .HasColumnName("losses")
                     .HasColumnType("int(64)");
-
-                entity.Property(e => e.Rank)
-                    .HasColumnName("rank")
-                    .HasColumnType("int(64)")
-                    .HasDefaultValueSql("'-1'");
 
                 entity.Property(e => e.TimesSearched)
                     .HasColumnName("times_searched")
@@ -173,6 +175,11 @@ namespace SpartanClash.Models.ClashDB
                     .HasColumnName("total_matches")
                     .HasColumnType("int(128)");
 
+                entity.Property(e => e.WaypointLeaderBoardRank)
+                    .HasColumnName("waypointLeaderBoardRank")
+                    .HasColumnType("int(64)")
+                    .HasDefaultValueSql("'-1'");
+
                 entity.Property(e => e.WinPercent).HasColumnName("win_percent");
 
                 entity.Property(e => e.Wins)
@@ -182,29 +189,29 @@ namespace SpartanClash.Models.ClashDB
 
             modelBuilder.Entity<TCompany2matches>(entity =>
             {
-                entity.HasKey(e => new { e.MatchId, e.Company });
+                entity.HasKey(e => new { e.MatchId, e.CompanyId });
 
                 entity.ToTable("t_company2matches");
 
-                entity.HasIndex(e => e.Company)
+                entity.HasIndex(e => e.CompanyId)
                     .HasName("fk_company");
 
-                entity.Property(e => e.MatchId).HasMaxLength(64);
+                entity.Property(e => e.MatchId)
+                    .HasColumnName("matchId")
+                    .HasMaxLength(64);
 
-                entity.Property(e => e.Company)
-                    .HasColumnName("company")
-                    .HasMaxLength(32);
+                entity.Property(e => e.CompanyId)
+                    .HasColumnName("companyId")
+                    .HasMaxLength(128);
 
-                entity.HasOne(d => d.CompanyNavigation)
+                entity.HasOne(d => d.Company)
                     .WithMany(p => p.TCompany2matches)
-                    .HasForeignKey(d => d.Company)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.CompanyId)
                     .HasConstraintName("fk_company");
 
                 entity.HasOne(d => d.Match)
                     .WithMany(p => p.TCompany2matches)
                     .HasForeignKey(d => d.MatchId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_MatchId");
             });
 
@@ -229,6 +236,38 @@ namespace SpartanClash.Models.ClashDB
                 entity.Property(e => e.PrintableName)
                     .HasColumnName("printableName")
                     .HasMaxLength(64);
+            });
+
+            modelBuilder.Entity<TMatchparticipants>(entity =>
+            {
+                entity.HasKey(e => e.MatchId);
+
+                entity.ToTable("t_matchparticipants");
+
+                entity.Property(e => e.MatchId)
+                    .HasColumnName("matchId")
+                    .HasMaxLength(64);
+
+                entity.Property(e => e.DnfPlayers)
+                    .HasColumnName("DNF_Players")
+                    .HasMaxLength(4096);
+
+                entity.Property(e => e.OtherPlayers)
+                    .HasColumnName("other_Players")
+                    .HasMaxLength(4096);
+
+                entity.Property(e => e.Team1Players)
+                    .HasColumnName("team1_Players")
+                    .HasMaxLength(4096);
+
+                entity.Property(e => e.Team2Players)
+                    .HasColumnName("team2_Players")
+                    .HasMaxLength(4096);
+
+                entity.HasOne(d => d.Match)
+                    .WithOne(p => p.TMatchparticipants)
+                    .HasForeignKey<TMatchparticipants>(d => d.MatchId)
+                    .HasConstraintName("fk_to_clashset");
             });
         }
     }

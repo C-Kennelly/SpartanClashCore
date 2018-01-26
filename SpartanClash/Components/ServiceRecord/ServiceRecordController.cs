@@ -26,20 +26,42 @@ namespace ServiceRecord
 
         public ActionResult CompanyCards(string company)
         {
+            string companyId = "-1";
+
+            TCompanies companyRecord = _clashdbContext.TCompanies.Where(record => record.CompanyName == company).FirstOrDefault();
+                
+            if(companyRecord != null)
+            {
+                companyId = companyRecord.CompanyId;
+
+            }
+
+            const int arenaGameModeNumber = 1;
+            const int warzoneGameModeNumber = 4;
+
             List<TClashdevset> companyMatches = _clashdbContext.TClashdevset
-                .Where(
-                    x => (x.Team1Company1 == company
-                            || x.Team1Company2 == company
-                            || x.Team2Company1 == company
-                            || x.Team2Company2 == company
-                            )
+                .Where( //Arena or Warzome match, with company participation.
+                    (x => (x.GameMode == arenaGameModeNumber 
+                                || x.GameMode == warzoneGameModeNumber)
+                          && (x.Team1Company == companyId 
+                                || x.Team2Company == companyId)
+                    )
                 ).ToList();
 
             List<ClanBattle> battles = new List<ClanBattle>(companyMatches.Count);
 
             foreach (TClashdevset match in companyMatches)
             {
-                battles.Add(new ClanBattle(company, match, _clashdbContext));
+                ClanBattle battle = new ClanBattle(company, match, _clashdbContext);
+
+                if(battle.allyHeader != battle.enemyHeader)
+                {
+                    battles.Add(battle);
+                }
+                else
+                {
+                    //Company fought itself, we would need Fireteams to reflect this without looking silly.
+                }
             }
 
             _userBehaviorTracker.LogCompanySearch(company);

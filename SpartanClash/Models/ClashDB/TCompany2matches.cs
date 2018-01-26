@@ -6,9 +6,9 @@ namespace SpartanClash.Models.ClashDB
     public partial class TCompany2matches
     {
         public string MatchId { get; set; }
-        public string Company { get; set; }
+        public string CompanyId { get; set; }
 
-        public TCompanies CompanyNavigation { get; set; }
+        public TCompanies Company { get; set; }
         public TClashdevset Match { get; set; }
     }
 }

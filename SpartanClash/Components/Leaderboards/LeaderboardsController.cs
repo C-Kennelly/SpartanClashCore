@@ -23,15 +23,15 @@ namespace Leaderboards
             string featuredCompany = "";
 
 
-            List<TCompanies> rankedCompanies = _clashdbContext.TCompanies.Where(x => x.Rank > 0).OrderBy(x => x.Rank).ToList();
+            List<TCompanies> rankedCompanies = _clashdbContext.TCompanies.Where(x => x.WaypointLeaderBoardRank > 0).OrderBy(x => x.WaypointLeaderBoardRank).ToList();
 
             if (rankedCompanies.Count > 0)
             {
-                featuredCompany = rankedCompanies[random.Next(rankedCompanies.Count)].Company.ToString();
+                featuredCompany = rankedCompanies[random.Next(rankedCompanies.Count)].CompanyName.ToString();
             }
             else
             {
-                featuredCompany = _clashdbContext.TCompanies.FirstOrDefault().Company.ToString();
+                featuredCompany = _clashdbContext.TCompanies.FirstOrDefault().CompanyName.ToString();
             }
 
             return RedirectToAction("CompanyCards", "ServiceRecord", new { company = featuredCompany } );

@@ -10,8 +10,9 @@ namespace SpartanClash.Models.ClashDB
             TCompany2matches = new HashSet<TCompany2matches>();
         }
 
-        public string Company { get; set; }
-        public int Rank { get; set; }
+        public string CompanyId { get; set; }
+        public string CompanyName { get; set; }
+        public int WaypointLeaderBoardRank { get; set; }
         public int? Wins { get; set; }
         public int? Losses { get; set; }
         public int? TotalMatches { get; set; }

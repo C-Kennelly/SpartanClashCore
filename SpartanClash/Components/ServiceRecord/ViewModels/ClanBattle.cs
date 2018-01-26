@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Linq;
 using SpartanClash.Models.ClashDB;
-using SpartanClash.Data;
+
 
 namespace ServiceRecord.ViewModels
 {
     public class ClanBattle
     {
-        const string missingCompanyValue = "NOCOMPANYFOUND";
+        const string missingCompanyValue = "0";
         const string printableMissingCompanyValue = "[randoms]";
 
         public string primaryCompany { get; set; }
@@ -25,9 +26,8 @@ namespace ServiceRecord.ViewModels
         private string mapImageURL { get; set; }
 
         private int team { get; set; }
-        private string allyCompany { get; set; }
-        private string enemyCompany1 { get; set; }
-        private string enemyCompany2 { get; set; }
+        private string enemyCompany { get; set; }
+
 
         clashdbContext _clashdbContext;
 
@@ -45,8 +45,8 @@ namespace ServiceRecord.ViewModels
             DetermineTeam(match);
             DetermineTeamSpecificComponents(match);
 
-            SetHeader(out allyHeader, primaryCompany, allyCompany);
-            SetHeader(out enemyHeader, enemyCompany1, enemyCompany2);
+            allyHeader = companyName;
+            SetEnemyHeader(out enemyHeader, enemyCompany);
 
             TMapmetadata metadataRecord = _clashdbContext.TMapmetadata.Find(match.MapId);
             mapName = metadataRecord.PrintableName;
@@ -86,6 +86,7 @@ namespace ServiceRecord.ViewModels
 
         private void SetSortingFlags()
         {
+            //draws count as a loss
             if (score > enemyScore)
             {
                 isWin = true;
@@ -117,7 +118,7 @@ namespace ServiceRecord.ViewModels
 
         private void DetermineTeam(TClashdevset match)
         {
-            if (primaryCompany == match.Team1Company1 || primaryCompany == match.Team1Company2)
+            if (primaryCompany == match.Team1Company)
             { team = 1; }
             else { team = 2; }
         }
@@ -126,57 +127,57 @@ namespace ServiceRecord.ViewModels
         {
             if (team == 1) //Company is on team 1
             {
-                score = (int)match.Team1Score;
-                enemyScore = (int)match.Team2Score;
-                enemyCompany1 = match.Team2Company1;
-                enemyCompany2 = match.Team2Company2;
+                enemyCompany = match.Team2Company;
 
-                if (primaryCompany == match.Team1Company1)
+                if (match.Team1Score != null)
                 {
-                    allyCompany = match.Team1Company2;
-                }
-                else
+                    score = (int)match.Team1Score;
+                } else { score = 0; }
+
+                if(match.Team2Score != null)
                 {
-                    allyCompany = match.Team1Company2;
-                }
+                    enemyScore = (int)match.Team2Score;
+                } else { enemyScore = 0; }
+
+                
             }
             else //Company is on team 2.
             {
-                score = (int)match.Team2Score;
-                enemyScore = (int)match.Team1Score;
+                enemyCompany = match.Team1Company;
 
-                enemyCompany1 = match.Team1Company1;
-                enemyCompany2 = match.Team1Company2;
-
-                if (primaryCompany == match.Team2Company1)
+                if (match.Team2Score != null)
                 {
-                    allyCompany = match.Team2Company2;
-                }
-                else
-                {
-                    allyCompany = match.Team2Company1;
-                }
+                    score = (int)match.Team2Score;
+                } else { score = 0; }
 
+                if (match.Team1Score != null)
+                {
+                    enemyScore = (int)match.Team1Score;
+                } else { enemyScore = 0; }
             }
 
         }
 
-        private void SetHeader(out string header, string mainCompany, string secondaryCompany)
+        private void SetEnemyHeader(out string header, string enemyCompanyId)
         {
-            if (mainCompany == missingCompanyValue)
+            if (enemyCompanyId == missingCompanyValue)
             {
                 header = printableMissingCompanyValue;
             }
             else
             {
-                if (secondaryCompany == missingCompanyValue)
+                TCompanies companyRecord = _clashdbContext.TCompanies.Where(record => record.CompanyId == enemyCompanyId).FirstOrDefault();
+
+                if (companyRecord != null)
                 {
-                    header = mainCompany;
+                    header = companyRecord.CompanyName;
+
                 }
                 else
                 {
-                    header = mainCompany + " & " + secondaryCompany;
+                    header = printableMissingCompanyValue;
                 }
+            
             }
         }
 
