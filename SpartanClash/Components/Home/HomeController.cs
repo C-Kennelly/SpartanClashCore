@@ -22,6 +22,7 @@ namespace Home
 
         public IActionResult Index()
         {
+            ViewData["DataRefreshDate"] = _clashdbContext.TClashmetadata.Find("active").DataRefreshDate;
             return View();
         }
 

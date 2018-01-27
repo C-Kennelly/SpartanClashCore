@@ -1,9 +1,11 @@
-﻿@{
+﻿@{  
+    @using System.Globalization;
     ViewData["Title"] = "Home Page";
+    DateTime dataRefreshDate = (DateTime)ViewData["DataRefreshDate"];
 }
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
         $(function () {
             $("#srch-companies").autocomplete({
                 source: "@Context.Request.Scheme://@Context.Request.Host.ToUriComponent()@Url.Action("CompanyAutocomplete", "Home")",
@@ -11,7 +13,7 @@
                 delay: 0
                 });
         });
-    </script>
+</script>
 
 <div class="jumbotron front-page-jumbotron">
     <h2>Fight together, Spartan.</h2>
@@ -29,4 +31,6 @@
     <h4>We track Spartan Companies as they play Halo together.</h4>
     <br />
     <h4>Start typing to explore our registry, or view a <a asp-controller="Leaderboards" asp-action="ViewRandomRankedTeam">featured team</a>.</h4>
+    <br />
+    <h6>Last data pull on @dataRefreshDate.ToString("MMMM", CultureInfo.InvariantCulture) @dataRefreshDate.Day.ToString() @@ @dataRefreshDate.ToShortTimeString()</h6>
 </div>
