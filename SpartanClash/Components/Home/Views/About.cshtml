@@ -1,53 +1,61 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-
-<!--<div class="jumbotron">
-    <h2>
-        Chase more than Achilles.
-    </h2>
-    <br />
-    <br />
-    <h3>
-        Spartan Clash brings your friends closer by giving you something to strive for.
-    </h3>
-</div>
--->
-
 <div class="question">
     <h3><b>What does Spartan Clash do?</b></h3>
     <p>
-        We think Halo is more fun with friends.<br />
-        We're tracking every game played by players in Spartan Companies, and we've got match histories for every Warzone Warlords match since the playlist debuted in January.<br />
+        We want to help people find more reasons to play Halo with their friends.<br />
+        There are a lot of excellent sites that focus on single-person statistics, but it's often hard to see how far your team has come.<br />
         <br />
-        Ultimately, we want you to be able to track your progress across all Warzone gametypes and find rival Companies to challenge.
+        We provide a view at the team level, instead of the the individual.
     </p>
 </div>
 <div class="question">
     <h3><b>How do you track matches?</b></h3>
     <p>
-        We use the Spartan Company lists published on Waypoint and the Halo 5 API to generate a list of possible matches.<br />
+        We use the Halo API to get match histories from all the Spartan Companies we are tracking.<br />
+        Then, we aggregate the results into the team views you see on the site.<br />
         <br />
-        Companies will appear on the Leaderboards once they've played 10 Warlords matches.
+        The match data we use comes directly from the offical servers, and we refresh data at least once every 24 hours.
     </p>
 </div>
 <div class="question">
     <h3><b>Which matches do you track? </b></h3>
     <p>
-        If we find any game that has 6 or more members from the same Company on the same team, we tag it and add it to our database.<br />
-        We don't discriminate between different parts of the company - if you're in the company when we pull the data, you count.<br />
+        We track ranked Arena modes, Big Team Battle, and (classic) Warzone.  Our affiliated player threshold to tag a match is 75%.  <br />
+        For example..
+        <ul>
+            <li>Slayer - teams with 3 or 4 players from the same Spartan Company.</li>
+            <li>BTB - teams with 6-8 players from the same Spartan Company.</li>
+            <li>Warzone - teams with 9-12 players from the same Spartan Company</li>
+        </ul>
         <br />
-        This means all you have to do to show up on the site is play Warzone Warlords with a fully party (6+ players) from your Spartan Company.
+        Once we're tracking your Spartan Company, all you have to do is play matchmaking with your friends and your games will appear here every night.
     </p>
 </div>
-
+<div class="question">
+    <h3><b>Will you track my company? </b></h3>
+    <p>
+        Yes, we'd love to!  Here's how: <br />
+        <ol>
+            <li>Make sure your company is registered on Halo Waypoint.</li>
+            <li>Go to the search bar on the home page and type in the name of your company there.  You'll get a "not found" page, but it lets us know you're interested.</li>
+            <li>Finally, play at least one game with a full party from your Spartan Company in one of the tracked modes</li>
+            <li>Check back the next day - we'll pull your data in on the next refresh.</li>
+        </ol>
+        <br />
+        Please feel free to hit us up directly on Discord if you think you think we're missing data for your team.
+    </p>
+</div>
 <div class="question">
     <h3><b>What's next?  Do you take feedback?</b></h3>
     <p>
-        We've planned a number of small, quality-of-life improvements around filtering/exploring data and displaying more in depth match results.<br />
-        After that, we'll be diving into our backend to support more playlists, but that will take a while.  Expect Warlords-only content for the next few months.<br />
+
+        Spartan Clash is very much a work in progress, and right now, the focus is on improving the backend and growing the list of tracked companies. <br />
+        Longer term, we're looking at ways to let people log into the site so that you can see the matches you care about. <br />
+        We're also exploring ways to share how to compare teams head-to-head. <br />
         <br />
-        If you have suggestions for the site, we'd love to hear from you at SpartanClashPilot@gmail.com.
+        If you have suggestions or questions for the site, we'd love to hear from you on our Discord.
     </p>
 </div>
 
