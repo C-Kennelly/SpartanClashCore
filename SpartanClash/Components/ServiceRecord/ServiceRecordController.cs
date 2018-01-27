@@ -17,11 +17,13 @@ namespace ServiceRecord
 
         clashdbContext _clashdbContext;
         UserBehaviorTracker _userBehaviorTracker;
+        PlaylistBroker _playlistBroker;
 
         public ServiceRecordController(clashdbContext context, UserBehaviorTracker behaviorTracker)
         {
             _clashdbContext = context;
             _userBehaviorTracker = behaviorTracker;
+            _playlistBroker = new PlaylistBroker();
         }
 
         public ActionResult CompanyCards(string company)
@@ -61,12 +63,14 @@ namespace ServiceRecord
              
                 ClanBattle battle = new ClanBattle(company, match, _clashdbContext, mapMetaData, allCompanies);
 
+
                 if(isTeamGame)
                 {
-                    battles.Add(battle);
+                    if (_playlistBroker.isTrackedPlaylist(match.HopperId))
+                    {
+                        battles.Add(battle);
+                    }
                 }
-
-                
             }
 
             _userBehaviorTracker.LogCompanySearch(company);
