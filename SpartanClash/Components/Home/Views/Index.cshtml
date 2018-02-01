@@ -1,7 +1,9 @@
-﻿@{  
+﻿@{
     @using System.Globalization;
     ViewData["Title"] = "Home Page";
+
     DateTime dataRefreshDate = (DateTime)ViewData["DataRefreshDate"];
+    DateTime localRefreshDate = TimeZoneInfo.ConvertTimeFromUtc(dataRefreshDate, TimeZoneInfo.Local);
 }
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -32,10 +34,10 @@
     <br />
     <h4>Start typing to explore our registry, or view a <a asp-controller="Leaderboards" asp-action="ViewRandomRankedTeam">featured team</a>.</h4>
     <br />
-    
+
 </div>
 <hr />
 <footer class="disclaimer">
     <h6>Join us on <a href="https://discord.gg/7FM7JyD" target="_blank">Discord</a> for questions.</h6>
-    <h6>Last data pull on @dataRefreshDate.ToString("MMMM", CultureInfo.InvariantCulture) @dataRefreshDate.Day.ToString() @@ @dataRefreshDate.ToShortTimeString()</h6>
+    <h6>Last data pull on @localRefreshDate.ToString("MMMM", CultureInfo.InvariantCulture) @localRefreshDate.Day.ToString() @@ @localRefreshDate.ToShortTimeString()</h6>
 </footer>
