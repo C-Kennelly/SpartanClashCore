@@ -3,7 +3,8 @@
     ViewData["Title"] = "Home Page";
 
     DateTime dataRefreshDate = (DateTime)ViewData["DataRefreshDate"];
-    DateTime localRefreshDate = TimeZoneInfo.ConvertTimeFromUtc(dataRefreshDate, TimeZoneInfo.Local);
+    TimeSpan span = DateTime.UtcNow.Subtract(dataRefreshDate);
+    int hoursSinceLastDataPull = (int)Math.Round(span.TotalHours, 0);
 }
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -39,5 +40,5 @@
 <hr />
 <footer class="disclaimer">
     <h6>Join us on <a href="https://discord.gg/7FM7JyD" target="_blank">Discord</a> for questions.</h6>
-    <h6>Last data pull on @localRefreshDate.ToString("MMMM", CultureInfo.InvariantCulture) @localRefreshDate.Day.ToString() @@ @localRefreshDate.ToShortTimeString()</h6>
+    <h6>Data is @hoursSinceLastDataPull hours old.</h6>
 </footer>
