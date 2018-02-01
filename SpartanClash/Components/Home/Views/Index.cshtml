@@ -40,5 +40,12 @@
 <hr />
 <footer class="disclaimer">
     <h6>Join us on <a href="https://discord.gg/7FM7JyD" target="_blank">Discord</a> for questions.</h6>
-    <h6>Data is @hoursSinceLastDataPull hours old.</h6>
+    @if (hoursSinceLastDataPull <= 1)
+    {
+        <h6>Data refreshed less than an hour ago.</h6>
+    }
+    else
+    {
+        <h6>Data refreshed @hoursSinceLastDataPull hours ago.</h6>
+    }
 </footer>
