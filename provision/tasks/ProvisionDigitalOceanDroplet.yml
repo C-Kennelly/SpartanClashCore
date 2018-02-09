@@ -1,0 +1,5 @@
+---
+- name: Adding the Erlang key
+  apt_key:
+    url: "http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc"
+    state: present

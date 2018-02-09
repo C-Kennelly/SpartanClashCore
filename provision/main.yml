@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Ensuring aptitude is present so that Ansible apt module doesn't break
+    apt:
+      name: aptitude
+      state: latest
+  - name: Updating the apt cache
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400
+
+#  - include: tasks/InstallRabbitMQ.yml
+#  - include: tasks/ConfigureRabbitMQ.yml
+ 
