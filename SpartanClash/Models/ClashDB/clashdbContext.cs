@@ -13,12 +13,12 @@ namespace SpartanClash.Models.ClashDB
         public virtual DbSet<TMapmetadata> TMapmetadata { get; set; }
         public virtual DbSet<TMatchparticipants> TMatchparticipants { get; set; }
 
-         public clashdbContext(DbContextOptions<clashdbContext> options)
-             : base(options)
-         {
- 
-         }
+        public clashdbContext(DbContextOptions<clashdbContext> options)
+            : base(options)
+        {
 
+        }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -117,7 +117,9 @@ namespace SpartanClash.Models.ClashDB
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'-1'");
 
-                entity.Property(e => e.Team1Score).HasColumnName("Team1_Score");
+                entity.Property(e => e.Team1Score)
+                    .HasColumnName("Team1_Score")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Team2Company)
                     .HasColumnName("Team2_Company")
@@ -138,7 +140,9 @@ namespace SpartanClash.Models.ClashDB
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'-1'");
 
-                entity.Property(e => e.Team2Score).HasColumnName("Team2_Score");
+                entity.Property(e => e.Team2Score)
+                    .HasColumnName("Team2_Score")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<TClashmetadata>(entity =>
