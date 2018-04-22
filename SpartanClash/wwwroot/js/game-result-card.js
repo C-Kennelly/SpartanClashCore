@@ -240,6 +240,20 @@ function ShowAllDatesUsing(cssFilterClass, textContent) {
     DateCleanup(textContent);
 }
 
+function ShowOnlyDatesForLast7DaysUsing(cssFilterClass, textContent) {
+    var allMatches = document.getElementsByClassName("game-result-card");
+
+    var sevenDayDate = MakeDateXDaysInPast(7);
+
+    var matchesToShow = GetAllMatchesAfterDate(allMatches, sevenDayDate);
+    var matchesToHide = GetAllMatchesBeforeDate(allMatches, sevenDayDate);
+
+    ShowCardsWithCSSFilter(matchesToShow, cssFilterClass);
+    HideCardsWithCSSFilter(matchesToHide, cssFilterClass);
+
+    DateCleanup(textContent);
+}
+
 function ShowOnlyDatesForLast30DaysUsing(cssFilterClass, textContent) {
     var allMatches = document.getElementsByClassName("game-result-card");
 
