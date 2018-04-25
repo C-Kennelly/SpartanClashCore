@@ -18,6 +18,7 @@ namespace ServiceRecord.ViewModels
 
         public int score { get; set; }
         public int enemyScore { get; set; }
+        public int enemyCsr{ get; set; }
         public DateTime matchDate { get; set; }
 
         public bool isWin { get; set; }
@@ -155,7 +156,7 @@ namespace ServiceRecord.ViewModels
                     enemyScore = (int)match.Team2Score;
                 } else { enemyScore = 0; }
 
-                
+                enemyCsr = match.Team2Csr;               
             }
             else //Company is on team 2.
             {
@@ -171,6 +172,8 @@ namespace ServiceRecord.ViewModels
                 {
                     enemyScore = (int)match.Team1Score;
                 } else { enemyScore = 0; }
+
+                enemyCsr = match.Team1Csr;
             }
 
         }

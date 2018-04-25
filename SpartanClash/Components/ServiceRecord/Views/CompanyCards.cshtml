@@ -93,31 +93,32 @@ else
         @if (battle.GetTeam() == 1)
         {
             <div class="game-result-card" onclick="ToggleSpacerWithCSSFilter(this, 'hidden')">
-                <div class="team-result team-result-ally team-result-red">
-                    <h2>@battle.score</h2>
-                    <h3>@battle.primaryCompany</h3>
-                </div>
-                <div class="spacer-bar red-spacer-bar hidden"></div>
-                <div class="game-result-spacer hidden">
-                    <div class="spacer-image-background">
-                        <img class="spacer-image" src="@battle.GetMapImageURL()" />
+                <div class="score-bar">
+                    <div class="team-result team-result-ally team-result-red">
+                        <h2>@battle.score</h2>
                     </div>
-                    <div class="spacer-overlay">
-                        <div class="spacer-item">
-                            <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
+                    <div class="spacer-bar red-spacer-bar hidden"></div>
+                    <div class="game-result-spacer hidden">
+                        <div class="spacer-image-background">
+                            <img class="spacer-image" src="@battle.GetMapImageURL()" />
                         </div>
-                        <div class="spacer-item">
-                            <h4><a href="@battle.GetWaypointDetailsURL()" target="_blank">Details</a></h4>
+                        <div class="spacer-overlay">
+                            <div class="spacer-item">
+                                <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
+                            </div>
+                            <div class="spacer-item">
+                                <h4><a href="@battle.GetWaypointDetailsURL()" target="_blank">Details</a></h4>
+                            </div>
+
                         </div>
                     </div>
+                    <div class="spacer-bar blue-spacer-bar hidden"></div>
+                    <div class="team-result team-result-enemy team-result-blue">
+                        <h2>@battle.enemyScore</h2>
+                    </div>
                 </div>
-                <div class="spacer-bar blue-spacer-bar hidden"></div>
-                <div class="team-result team-result-enemy team-result-blue">
-                    <h2>@battle.enemyScore</h2>
-                    @if (battle.isClanBattle)
-                    {   <h3><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
-                    else
-                    {   <h3>@battle.enemyHeader</h3> }
+                <div class ="opponent-info-bar">
+                    <h3>Opponent CSR: @battle.enemyCsr</h3>
                 </div>
                 <div class="match-filter-data">
                     <p class="filter-isWin">@battle.isWin</p>
@@ -125,37 +126,37 @@ else
                     <p class="filter-matchDate">@battle.matchDate</p>
                     <p class="filter-gameMode">@battle.gameMode</p>
                 </div>
-            </div>
+            </div>        
         }
         else
         {
             <div class="game-result-card" onclick="ToggleSpacerWithCSSFilter(this, 'hidden')">
-                <div class="team-result team-result-ally team-result-blue">
-                    <h2>@battle.score</h2>
-                    <h3>@battle.primaryCompany</h3>
-                </div>
-                <div class="spacer-bar blue-spacer-bar hidden"></div>
-                <div class="game-result-spacer hidden">
-                    <div class="spacer-image-background">
-                        <img class="spacer-image" src="@battle.GetMapImageURL()" />
+                <div class="score-bar">
+                    <div class="team-result team-result-ally team-result-blue">
+                        <h2>@battle.score</h2>
                     </div>
-                    <div class="spacer-overlay">
-                        <div class="spacer-item">
-                            <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
+                    <div class="spacer-bar blue-spacer-bar hidden"></div>
+                    <div class="game-result-spacer hidden">
+                        <div class="spacer-image-background">
+                            <img class="spacer-image" src="@battle.GetMapImageURL()" />
                         </div>
-                        <div class="spacer-item">
-                            <h4><a href="@battle.GetWaypointDetailsURL()" target="_blank">Details</a></h4>
-                        </div>
+                        <div class="spacer-overlay">
+                            <div class="spacer-item">
+                                <h4>@battle.matchDate.ToString("MMM", CultureInfo.InvariantCulture) @battle.matchDate.Day.ToString() @battle.matchDate.Year</h4>
+                            </div>
+                            <div class="spacer-item">
+                                <h4><a href="@battle.GetWaypointDetailsURL()" target="_blank">Details</a></h4>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="spacer-bar red-spacer-bar hidden"></div>
+                    <div class="team-result team-result-enemy team-result-red">
+                        <h2>@battle.enemyScore</h2>
                     </div>
                 </div>
-                <div class="spacer-bar red-spacer-bar hidden"></div>
-                <div class="team-result team-result-enemy team-result-red">
-                    <h2>@battle.enemyScore</h2>
-                    @if (battle.isClanBattle)
-                    {   <h3><a asp-controller="ServiceRecord" asp-action="CompanyCards" asp-route-company="@battle.enemyHeader">@battle.enemyHeader</a></h3> }
-                    else
-                    {   <h3>@battle.enemyHeader</h3> }
+                <div class ="opponent-info-bar">
+                    <h3>Opponent CSR: @battle.enemyCsr</h3>
                 </div>
                 <div class="match-filter-data">
                     <p class="filter-isWin">@battle.isWin</p>

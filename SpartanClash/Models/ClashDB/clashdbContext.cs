@@ -102,6 +102,10 @@ namespace SpartanClash.Models.ClashDB
                     .HasColumnName("Team1_Company")
                     .HasColumnType("text");
 
+                entity.Property(e => e.Team1Csr)
+                    .HasColumnName("Team1_CSR")
+                    .HasColumnType("int(11)");
+
                 entity.Property(e => e.Team1Dnfcount)
                     .HasColumnName("Team1_DNFCount")
                     .HasColumnType("int(11)")
@@ -124,6 +128,10 @@ namespace SpartanClash.Models.ClashDB
                 entity.Property(e => e.Team2Company)
                     .HasColumnName("Team2_Company")
                     .HasColumnType("text");
+
+                entity.Property(e => e.Team2Csr)
+                    .HasColumnName("Team2_CSR")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Team2Dnfcount)
                     .HasColumnName("Team2_DNFCount")
