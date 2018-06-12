@@ -10,8 +10,13 @@
 
 @{ TCompanies compOne = Model.FirstOrDefault(); }
 
-<div>
-    <h1>There's a thing you do here that makes things not suck.</h1>
+<div class="company-box">
+    <div class="company-box-tab">
+        <p>&times;</p>
+    </div>
+    <div class="company-box-title">
+        <h3>@compOne.CompanyName</h3>
+    </div>
 </div>
 
 <div class="company-box">
@@ -21,7 +26,6 @@
     <div class="company-box-title">
         <h3>@compOne.CompanyName</h3>
     </div>
-    
 </div>
 
 <!--
