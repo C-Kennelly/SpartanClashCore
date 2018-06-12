@@ -1,0 +1,36 @@
+@using SpartanClash.Models.ClashDB;
+@model List<TCompanies>
+
+<link rel="stylesheet" href="~/css/registry.css" />
+
+@{
+    Layout = "~/Components/_SharedViews/_Layout.cshtml";
+}
+
+
+@{ TCompanies compOne = Model.FirstOrDefault(); }
+
+<div>
+    <h1>There's a thing you do here that makes things not suck.</h1>
+</div>
+
+<div class="company-box">
+    <div class="company-box-tab">
+        <p>[Red]</p>
+    </div>
+    <div class="company-box-title">
+        <h3>@compOne.CompanyName</h3>
+    </div>
+    
+</div>
+
+<!--
+@foreach (TCompanies company in Model)
+{
+    <div>
+        <p>@company.CompanyName</p>
+    </div>
+    
+}
+-->
+
