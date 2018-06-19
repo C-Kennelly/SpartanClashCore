@@ -19,7 +19,7 @@ namespace ServiceRecord
 
         public ActionResult All()
         {
-            List<TCompanies> companyList = _clashdbContext.TCompanies.ToList();
+            List<TCompanies> companyList = _clashdbContext.TCompanies.OrderBy(x => x.CompanyName).ToList();
             return View(companyList);
         }
     }

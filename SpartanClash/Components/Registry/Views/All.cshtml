@@ -5,36 +5,33 @@
 
 @{
     Layout = "~/Components/_SharedViews/_Layout.cshtml";
+    TCompanies compOne = Model.FirstOrDefault();
 }
 
 
-@{ TCompanies compOne = Model.FirstOrDefault(); }
-
-<div class="company-box">
-    <div class="company-box-tab">
-        <p>&times;</p>
-    </div>
-    <div class="company-box-title">
-        <h3>@compOne.CompanyName</h3>
-    </div>
+<div class="company-cards">
+    @foreach (TCompanies company in Model)
+    {
+        <div class="company-box">
+            <div class="company-box-tab">
+                @if(company.WaypointLeaderBoardRank < 0)
+                { 
+                    <p>&times;</p> 
+                }     
+                else 
+                { 
+                    <img class="rank-image" src="~/images/Registry/csr_bronze_array02-431098c768ef4832b5d925ba06efbe70.png" alt="rankingImage"> 
+                }
+            </div>
+            <div class="company-box-title">
+                <a  asp-controller="ServiceRecord" 
+                        asp-action="CompanyCards"
+                        asp-route-company="@company.CompanyName">
+                    <h4>
+                        @company.CompanyName
+                    </h4>
+                </a>
+            </div>
+        </div>
+    }
 </div>
-
-<div class="company-box">
-    <div class="company-box-tab">
-        <p>[Red]</p>
-    </div>
-    <div class="company-box-title">
-        <h3>@compOne.CompanyName</h3>
-    </div>
-</div>
-
-<!--
-@foreach (TCompanies company in Model)
-{
-    <div>
-        <p>@company.CompanyName</p>
-    </div>
-    
-}
--->
-
